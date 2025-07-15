@@ -292,15 +292,6 @@ const Resume = () => {
                   <Download className="mr-2 h-4 w-4" />
                   Download Standard Resume
                 </Button>
-                <Button 
-                  variant="outline"
-                  className="border-primary/50 hover:bg-primary/10"
-                  asChild
-                >
-                  <a href="mailto:dheerajgaur.0fficial@gmail.com?subject=Custom Resume Request">
-                    Request Custom Version
-                  </a>
-                </Button>
               </div>
             </CardContent>
           </Card>
