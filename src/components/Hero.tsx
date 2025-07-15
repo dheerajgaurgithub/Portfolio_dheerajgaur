@@ -158,7 +158,7 @@ const Hero = () => {
   }, [charIndex, currentIndex]);
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-24 sm:pt-32">
       {/* Background */}
       <div className="absolute inset-0 bg-[var(--gradient-hero)]"></div>
 
