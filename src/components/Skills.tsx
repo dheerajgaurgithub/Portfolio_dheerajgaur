@@ -126,7 +126,7 @@ const Skills = () => {
         <Card className="tech-card">
           <CardContent className="p-8 text-center">
             <h3 className="text-2xl font-bold mb-4 gradient-text">MERN Stack Developer</h3>
-            <div className="flex flex-col xs:flex-row justify-center items-center gap-4 xs:gap-8 text-4xl">
+            <div className="flex justify-center items-center gap-8 text-4xl">
               <div className="hover:scale-110 transition-transform" title="MongoDB">🍃</div>
               <div className="text-2xl text-muted-foreground">+</div>
               <div className="hover:scale-110 transition-transform" title="Express.js">🚂</div>
