@@ -240,15 +240,15 @@ const Resume = () => {
                     <h4 className="font-semibold mb-3 text-foreground">Quick Stats</h4>
                     <div className="grid grid-cols-2 gap-4 text-center">
                       <div className="p-3 rounded-lg bg-muted/50">
-                        <div className="font-bold text-primary">2+</div>
-                        <div className="text-xs text-muted-foreground">Years Experience</div>
+                        <div className="font-bold text-primary">Problem Solver</div>
+                        <div className="text-xs text-muted-foreground">LeetCode</div>
                       </div>
                       <div className="p-3 rounded-lg bg-muted/50">
                         <div className="font-bold text-secondary">6+</div>
                         <div className="text-xs text-muted-foreground">Projects Built</div>
                       </div>
                       <div className="p-3 rounded-lg bg-muted/50">
-                        <div className="font-bold text-accent">150+</div>
+                        <div className="font-bold text-accent">195+</div>
                         <div className="text-xs text-muted-foreground">Problems Solved</div>
                       </div>
                       <div className="p-3 rounded-lg bg-muted/50">

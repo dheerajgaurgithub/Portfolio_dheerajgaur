@@ -61,7 +61,7 @@ const Skills = () => {
         </div>
 
         {/* Skills Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           {skillCategories.map((category, categoryIndex) => (
             <Card 
               key={categoryIndex} 
@@ -101,7 +101,7 @@ const Skills = () => {
           <h3 className="text-2xl font-bold text-center mb-8 gradient-text">
             Core Computer Science
           </h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {coreSubjects.map((subject, index) => (
               <Card 
                 key={index} 

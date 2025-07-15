@@ -176,7 +176,7 @@ const Hero = () => {
                 <img
                   src={profileImage}
                   alt="Dheeraj Gaur"
-                  className="w-96 h-96 lg:w-[500px] lg:h-[500px] rounded-full object-cover border-4 border-primary/20 shadow-[var(--shadow-elegant)] slide-in-left"
+                  className="w-48 h-48 sm:w-72 sm:h-72 md:w-96 md:h-96 lg:w-[500px] lg:h-[500px] rounded-full object-cover border-4 border-primary/20 shadow-[var(--shadow-elegant)] slide-in-left"
                 />
               </div>
             </div>
