@@ -150,9 +150,9 @@ const Resume = () => {
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="flex flex-col lg:flex-row gap-8">
             {/* Resume Preview */}
-            <Card className="tech-card">
+            <Card className="tech-card flex-1">
               <CardContent className="p-8">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="skill-icon">
@@ -218,10 +218,9 @@ const Resume = () => {
             </Card>
 
             {/* Resume Highlights */}
-            <Card className="tech-card">
+            <Card className="tech-card flex-1">
               <CardContent className="p-8">
                 <h3 className="text-2xl font-bold mb-6 gradient-text">Key Highlights</h3>
-                
                 <div className="space-y-4 mb-8">
                   {resumeHighlights.map((highlight, index) => (
                     <div 
@@ -238,7 +237,7 @@ const Resume = () => {
                 <div className="space-y-6">
                   <div>
                     <h4 className="font-semibold mb-3 text-foreground">Quick Stats</h4>
-                    <div className="grid grid-cols-2 gap-4 text-center">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
                       <div className="p-3 rounded-lg bg-muted/50">
                         <div className="font-bold text-primary">Problem Solver</div>
                         <div className="text-xs text-muted-foreground">LeetCode</div>

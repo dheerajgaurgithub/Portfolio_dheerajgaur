@@ -157,7 +157,7 @@ const Contact = () => {
                   className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 shadow-[var(--shadow-elegant)]"
                   asChild
                 >
-                  <a href="mailto:dheerajgaur.0fficial@gmail.com?subject=Hello Dheeraj!">
+                  <a href="mailto:dheerajgaur.0fficial@gmail.com">
                     <Send className="mr-2 h-4 w-4" />
                     Send Message
                   </a>
