@@ -8,11 +8,16 @@ const LeetCode = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [theme, setTheme] = useState('light');
+  const [reloadTrigger, setReloadTrigger] = useState(Date.now());
 
-  // Theme detection
+  // Detect dark/light theme and observe changes
   useEffect(() => {
-    const getTheme = () =>
-      document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    const getTheme = () => {
+      if (typeof window !== 'undefined' && window.document) {
+        return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+      }
+      return 'light';
+    };
 
     setTheme(getTheme());
 
@@ -20,15 +25,21 @@ const LeetCode = () => {
       setTheme(getTheme());
     });
 
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class'],
-    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
     return () => observer.disconnect();
   }, []);
 
-  // Fetch LeetCode stats
+  // Periodically refresh image (every 30 seconds)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setReloadTrigger(Date.now());
+    }, 30000); // Refresh every 30 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Fetch JSON stats (for cards if needed)
   useEffect(() => {
     const fetchLeetCodeData = async () => {
       try {
@@ -87,7 +98,6 @@ const LeetCode = () => {
           </div>
         </div>
 
-        {/* Loading State */}
         {loading ? (
           <div className="flex justify-center items-center py-20">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
@@ -95,12 +105,13 @@ const LeetCode = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 mb-12">
+            {/* Stats Image Card */}
             <Card className="tech-card w-full">
-              <CardContent className="p-0 overflow-hidden">
+              <CardContent className="p-4">
                 <img
-                  src={`https://leetcode-stats.vercel.app/api?username=dheerajgaur_official&theme=${theme}`}
+                  src={`https://leetcode-stats.vercel.app/api?username=dheerajgaur_official&theme=${theme}&t=${reloadTrigger}`}
                   alt="LeetCode Stats"
-                  className="w-full h-auto"
+                  className="w-full h-auto rounded-lg shadow"
                 />
               </CardContent>
             </Card>
@@ -113,7 +124,7 @@ const LeetCode = () => {
             <CardContent className="p-8">
               <h3 className="text-2xl font-bold mb-4 gradient-text">Coding Philosophy</h3>
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                "Every problem is an opportunity to learn and grow. Consistent practice and
+                "Every problem is an opportunity to learn and grow. Consistent practice and 
                 analytical thinking are the keys to mastering data structures and algorithms."
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4 w-full max-w-xs mx-auto mt-4">
