@@ -205,14 +205,6 @@ const Resume = () => {
                     <Eye className="mr-2 h-4 w-4" />
                     Preview Full
                   </Button>
-                  <Button 
-                    size="sm"
-                    onClick={handleDownloadResume}
-                    className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 flex-1"
-                  >
-                    <Download className="mr-2 h-4 w-4" />
-                    Download PDF
-                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -302,13 +294,7 @@ const Resume = () => {
             <DialogHeader>
               <DialogTitle className="flex items-center justify-between">
                 <span className="gradient-text">Complete Resume Preview</span>
-                <Button 
-                  onClick={handleDownloadResume}
-                  className="bg-gradient-to-r from-primary to-secondary hover:opacity-90"
-                >
-                  <Download className="mr-2 h-4 w-4" />
-                  Download PDF
-                </Button>
+                {/* Download button removed */}
               </DialogTitle>
             </DialogHeader>
             
