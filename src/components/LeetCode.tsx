@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ExternalLink, Code, Loader2 } from 'lucide-react';
+import { ExternalLink, Code, Loader2, AlertTriangle } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
@@ -10,7 +10,7 @@ const LeetCode = () => {
   const [theme, setTheme] = useState('light');
   const [reloadTrigger, setReloadTrigger] = useState(Date.now());
 
-  // Detect dark/light theme and observe changes
+  // Detect dark/light theme
   useEffect(() => {
     const getTheme = () => {
       if (typeof window !== 'undefined' && window.document) {
@@ -25,28 +25,39 @@ const LeetCode = () => {
       setTheme(getTheme());
     });
 
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
 
     return () => observer.disconnect();
   }, []);
 
-  // Periodically refresh image (every 30 seconds)
+  // Refresh image every 30 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setReloadTrigger(Date.now());
-    }, 30000); // Refresh every 30 seconds
+    }, 30000);
 
     return () => clearInterval(interval);
   }, []);
 
-  // Fetch JSON stats (for cards if needed)
+  // Fetch JSON stats with timeout
   useEffect(() => {
     const fetchLeetCodeData = async () => {
+      const corsProxy = 'https://corsproxy.io/?';
+      const apiUrl = `${corsProxy}https://leetcode-stats.vercel.app/api?username=dheerajgaur_official`;
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 9000); // 9 seconds timeout
+
       try {
         setLoading(true);
-        const response = await fetch('https://leetcode-stats.vercel.app/api?username=dheerajgaur_official');
+        setError(null);
+        const response = await fetch(apiUrl, { signal: controller.signal });
+
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
+
         setLeetCodeStats({
           totalSolved: data.totalSolved || 0,
           easySolved: data.easySolved || 0,
@@ -56,9 +67,10 @@ const LeetCode = () => {
         });
       } catch (err) {
         console.error('Error fetching LeetCode data:', err);
-        setError(err.message);
+        setError('Failed to fetch LeetCode stats. Please try again later.');
         setLeetCodeStats(null);
       } finally {
+        clearTimeout(timeout);
         setLoading(false);
       }
     };
@@ -103,9 +115,13 @@ const LeetCode = () => {
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
             <span className="ml-2 text-muted-foreground">Loading LeetCode stats...</span>
           </div>
+        ) : error ? (
+          <div className="flex justify-center items-center text-red-500 py-10 gap-2">
+            <AlertTriangle className="h-6 w-6" />
+            <span>{error}</span>
+          </div>
         ) : (
           <div className="grid grid-cols-1 mb-12">
-            {/* Stats Image Card */}
             <Card className="tech-card w-full">
               <CardContent className="p-4">
                 <img

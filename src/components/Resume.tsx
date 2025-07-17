@@ -10,57 +10,100 @@ const Resume = () => {
 
   const handleDownloadResume = () => {
     const doc = new jsPDF();
-    doc.setFontSize(18);
-    doc.text(fullResumeData.personalInfo.name, 10, 15);
-    doc.setFontSize(12);
-    doc.text(fullResumeData.personalInfo.title, 10, 25);
-    doc.text(`Email: ${fullResumeData.personalInfo.email}`, 10, 35);
-    doc.text(`Phone: ${fullResumeData.personalInfo.phone}`, 10, 42);
-    doc.text(`Location: ${fullResumeData.personalInfo.location}`, 10, 49);
-    doc.text(`LinkedIn: ${fullResumeData.personalInfo.linkedin}`, 10, 56);
-    doc.text(`GitHub: ${fullResumeData.personalInfo.github}`, 10, 63);
-    let y = 75;
+    // Blue border
+    doc.setDrawColor(41, 128, 185);
+    doc.setLineWidth(2);
+    doc.rect(8, 8, 194, 281);
+    // Header
+    doc.setFontSize(22);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(41, 128, 185);
+    doc.text(fullResumeData.personalInfo.name, 105, 18, { align: 'center' });
+    doc.setFontSize(13);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(0,0,0);
+    doc.text(fullResumeData.personalInfo.title, 105, 27, { align: 'center' });
+    doc.setFontSize(10);
+    doc.text(`DOB: 28-07-2005`, 105, 32, { align: 'center' });
+    doc.text(`Email: ${fullResumeData.personalInfo.email} | Phone: ${fullResumeData.personalInfo.phone}`, 105, 38, { align: 'center' });
+    doc.text(`Location: ${fullResumeData.personalInfo.location}`, 105, 44, { align: 'center' });
+    doc.text(`LinkedIn: ${fullResumeData.personalInfo.linkedin} | GitHub: ${fullResumeData.personalInfo.github}`, 105, 50, { align: 'center' });
+    doc.setDrawColor(41, 128, 185);
+    doc.setLineWidth(1);
+    doc.line(20, 54, 190, 54);
+    let y = 62;
+    // Education
     doc.setFontSize(14);
-    doc.text("Education", 10, y);
-    doc.setFontSize(12);
+    doc.setTextColor(41, 128, 185);
+    doc.text('Education', 20, y);
+    doc.setDrawColor(41, 128, 185);
+    doc.line(20, y + 2, 60, y + 2);
     y += 7;
+    doc.setFontSize(11);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(0,0,0);
     fullResumeData.education.forEach((edu) => {
-      doc.text(`${edu.degree} - ${edu.institution} (${edu.duration}) ${edu.cgpa || edu.grade || ""}`.trim(), 12, y);
+      // Show course and institution on the same line
+      doc.text(`${edu.degree} - ${edu.institution}`, 22, y);
+      doc.text(`${edu.duration}`, 150, y);
       y += 7;
     });
-    y += 5;
+    y += 4;
+    // Experience
     doc.setFontSize(14);
-    doc.text("Experience", 10, y);
-    doc.setFontSize(12);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(41, 128, 185);
+    doc.text('Experience', 20, y);
+    doc.setDrawColor(41, 128, 185);
+    doc.line(20, y + 2, 60, y + 2);
     y += 7;
+    doc.setFontSize(11);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(0,0,0);
     fullResumeData.experience.forEach((exp) => {
-      doc.text(`${exp.position} - ${exp.company} (${exp.duration})`, 12, y);
+      doc.text(`${exp.position}`, 22, y);
+      doc.text(`${exp.company}`, 80, y);
+      doc.text(`${exp.duration}`, 150, y);
       y += 6;
       exp.achievements.forEach((ach) => {
-        doc.text(`- ${ach}`, 16, y);
-        y += 6;
+        doc.text(`- ${ach}`, 25, y);
+        y += 5;
       });
       y += 2;
     });
-    y += 5;
+    y += 4;
+    // Skills
     doc.setFontSize(14);
-    doc.text("Skills", 10, y);
-    doc.setFontSize(12);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(41, 128, 185);
+    doc.text('Skills', 20, y);
+    doc.setDrawColor(41, 128, 185);
+    doc.line(20, y + 2, 60, y + 2);
     y += 7;
+    doc.setFontSize(11);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(0,0,0);
     Object.entries(fullResumeData.skills).forEach(([cat, skills]) => {
-      doc.text(`${cat}: ${(skills as string[]).join(", ")}`, 12, y);
-      y += 6;
+      doc.text(`${cat.charAt(0).toUpperCase() + cat.slice(1)}: ${(skills as string[]).join(', ')}`, 22, y);
+      y += 5;
     });
-    y += 5;
+    y += 4;
+    // Achievements
     doc.setFontSize(14);
-    doc.text("Achievements", 10, y);
-    doc.setFontSize(12);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(41, 128, 185);
+    doc.text('Achievements', 20, y);
+    doc.setDrawColor(41, 128, 185);
+    doc.line(20, y + 2, 60, y + 2);
     y += 7;
+    doc.setFontSize(11);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(0,0,0);
     fullResumeData.achievements.forEach((ach) => {
-      doc.text(`- ${ach}`, 12, y);
-      y += 6;
+      doc.text(`- ${ach}`, 22, y);
+      y += 5;
     });
-    doc.save("Dheeraj_Gaur_Resume.pdf");
+    doc.save('Dheeraj_Gaur_Resume.pdf');
   };
 
   const fullResumeData = {
@@ -78,13 +121,11 @@ const Resume = () => {
         degree: 'Bachelor of Technology in Computer Science & Engineering',
         institution: 'GLA University, Mathura',
         duration: '2023 - 2026',
-        cgpa: 'Current CGPA: 7.26/10'
       },
       {
         degree: 'Diploma in Computer Science & Information Technology',
-        institution: 'Vivekananda College',
+        institution: 'Board Of Technical Eductaion',
         duration: 'Completed',
-        grade: 'First Division'
       }
     ],
     experience: [
@@ -102,10 +143,10 @@ const Resume = () => {
       {
         position: 'Full Stack Development Intern',
         company: 'Integraminds',
-        duration: 'Mar 2024 - May 2024',
+        duration: 'Aug 2024 - Sep 2024',
         achievements: [
           'Built dynamic user interfaces with React.js',
-          'Worked on backend development using Node.js and Express',
+          'Worked on backend development using Flask, Django',
           'Integrated third-party APIs and services',
           'Participated in code reviews and agile development'
         ]
@@ -196,8 +237,8 @@ const Resume = () => {
                 </div>
 
                 <div className="flex gap-3 mt-6">
-                  <Button 
-                    size="sm" 
+                  <Button
+                    size="sm"
                     variant="outline"
                     className="border-primary/50 hover:bg-primary/10 flex-1"
                     onClick={() => setShowFullPreview(true)}
@@ -215,10 +256,10 @@ const Resume = () => {
                 <h3 className="text-2xl font-bold mb-6 gradient-text">Key Highlights</h3>
                 <div className="space-y-4 mb-8">
                   {resumeHighlights.map((highlight, index) => (
-                    <div 
-                      key={index} 
+                    <div
+                      key={index}
                       className="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-r from-primary/5 to-secondary/5 border border-primary/10 hover:border-primary/30 transition-colors"
-                      style={{animationDelay: `${index * 0.1}s`}}
+                      style={{ animationDelay: `${index * 0.1}s` }}
                     >
                       <div className="w-2 h-2 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
                       <span className="font-medium">{highlight}</span>
@@ -272,11 +313,11 @@ const Resume = () => {
             <CardContent className="p-8 text-center">
               <h3 className="text-2xl font-bold mb-4 gradient-text">Looking for a Custom Resume?</h3>
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                Need a tailored resume for a specific role? I can customize my resume to highlight 
+                Need a tailored resume for a specific role? I can customize my resume to highlight
                 the most relevant skills and experiences for your opportunity.
               </p>
               <div className="flex justify-center gap-4">
-                <Button 
+                <Button
                   className="bg-gradient-to-r from-primary to-secondary hover:opacity-90"
                   onClick={handleDownloadResume}
                 >
@@ -297,7 +338,7 @@ const Resume = () => {
                 {/* Download button removed */}
               </DialogTitle>
             </DialogHeader>
-            
+
             <div className="bg-background border border-border rounded-lg p-8 shadow-inner">
               {/* Header */}
               <div className="text-center mb-8 border-b border-border pb-6">
@@ -321,15 +362,23 @@ const Resume = () => {
                   Education
                 </h3>
                 {fullResumeData.education.map((edu, index) => (
-                  <div key={index} className="mb-4 pb-4 border-b border-border last:border-b-0">
-                    <h4 className="font-semibold text-foreground">{edu.degree}</h4>
-                    <p className="text-muted-foreground">{edu.institution}</p>
-                    <div className="flex justify-between text-sm text-muted-foreground">
-                      <span>{edu.duration}</span>
-                      <span>{edu.cgpa || edu.grade}</span>
+                  <div
+                    key={index}
+                    className="mb-6 last:mb-0 pb-6 border-b border-border last:border-b-0"
+                  >
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center">
+                      <h4 className="text-lg font-semibold text-foreground">{edu.degree}</h4>
+                      {/* <span className="text-sm text-muted-foreground mt-1 sm:mt-0">
+                        {edu.duration}
+                      </span> */}
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center">
+                    <p className="text-muted-foreground mt-1">{edu.institution}</p>
                     </div>
                   </div>
                 ))}
+
               </div>
 
               {/* Experience */}

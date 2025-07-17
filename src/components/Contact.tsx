@@ -178,12 +178,12 @@ const Contact = () => {
 
           {/* Quick Response Promise */}
           <div className="mt-8 text-center">
-            <p className="text-sm text-muted-foreground">
+            <div className="text-sm text-muted-foreground">
               <span className="inline-flex items-center gap-1">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                 Usually responds within 24 hours
               </span>
-            </p>
+            </div>
           </div>
         </div>
       </div>
