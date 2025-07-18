@@ -1,23 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { ExternalLink, Code, Loader2, AlertTriangle } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { ExternalLink, Code, Loader2 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
 const LeetCode = () => {
-  const [leetCodeStats, setLeetCodeStats] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [theme, setTheme] = useState('light');
   const [reloadTrigger, setReloadTrigger] = useState(Date.now());
 
-  // Detect dark/light theme
+  // Detect dark/light theme changes
   useEffect(() => {
-    const getTheme = () => {
-      if (typeof window !== 'undefined' && window.document) {
-        return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-      }
-      return 'light';
-    };
+    const getTheme = () =>
+      document.documentElement.classList.contains('dark') ? 'dark' : 'light';
 
     setTheme(getTheme());
 
@@ -38,44 +31,7 @@ const LeetCode = () => {
     const interval = setInterval(() => {
       setReloadTrigger(Date.now());
     }, 30000);
-
     return () => clearInterval(interval);
-  }, []);
-
-  // Fetch JSON stats with timeout
-  useEffect(() => {
-    const fetchLeetCodeData = async () => {
-      const corsProxy = 'https://corsproxy.io/?';
-      const apiUrl = `${corsProxy}https://leetcode-stats.vercel.app/api?username=dheerajgaur_official`;
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 9000); // 9 seconds timeout
-
-      try {
-        setLoading(true);
-        setError(null);
-        const response = await fetch(apiUrl, { signal: controller.signal });
-
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const data = await response.json();
-
-        setLeetCodeStats({
-          totalSolved: data.totalSolved || 0,
-          easySolved: data.easySolved || 0,
-          mediumSolved: data.mediumSolved || 0,
-          hardSolved: data.hardSolved || 0,
-          ranking: data.ranking || 'N/A',
-        });
-      } catch (err) {
-        console.error('Error fetching LeetCode data:', err);
-        setError('Failed to fetch LeetCode stats. Please try again later.');
-        setLeetCodeStats(null);
-      } finally {
-        clearTimeout(timeout);
-        setLoading(false);
-      }
-    };
-
-    fetchLeetCodeData();
   }, []);
 
   return (
@@ -110,29 +66,18 @@ const LeetCode = () => {
           </div>
         </div>
 
-        {loading ? (
-          <div className="flex justify-center items-center py-20">
-            <Loader2 className="h-8 w-8 animate-spin text-primary" />
-            <span className="ml-2 text-muted-foreground">Loading LeetCode stats...</span>
-          </div>
-        ) : error ? (
-          <div className="flex justify-center items-center text-red-500 py-10 gap-2">
-            <AlertTriangle className="h-6 w-6" />
-            <span>{error}</span>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 mb-12">
-            <Card className="tech-card w-full">
-              <CardContent className="p-4">
-                <img
-                  src={`https://leetcode-stats.vercel.app/api?username=dheerajgaur_official&theme=${theme}&t=${reloadTrigger}`}
-                  alt="LeetCode Stats"
-                  className="w-full h-auto rounded-lg shadow"
-                />
-              </CardContent>
-            </Card>
-          </div>
-        )}
+        {/* Stats Card */}
+        <div className="grid grid-cols-1 mb-12">
+          <Card className="tech-card w-full">
+            <CardContent className="p-4">
+              <img
+                src={`https://leetcode-stats.vercel.app/api?username=dheerajgaur_official&theme=${theme}&t=${reloadTrigger}`}
+                alt="LeetCode Stats"
+                className="w-full h-auto rounded-lg shadow"
+              />
+            </CardContent>
+          </Card>
+        </div>
 
         {/* Call to Action */}
         <div className="mt-12 text-center">

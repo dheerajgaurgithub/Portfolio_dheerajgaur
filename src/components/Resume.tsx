@@ -9,6 +9,17 @@ const Resume = () => {
   const [showFullPreview, setShowFullPreview] = useState(false);
 
   const handleDownloadResume = () => {
+    // Download the static PDF from public/assets folder
+    const link = document.createElement('a');
+    link.href = '/assets/DheerajGaur_CSE23_GLAU.docx.pdf';
+    link.download = 'DheerajGaur_CSE23_GLAU.docx.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  // Generate PDF dynamically using jsPDF
+  const handleGeneratePDF = () => {
     const doc = new jsPDF();
     // Blue border
     doc.setDrawColor(41, 128, 185);
@@ -43,7 +54,6 @@ const Resume = () => {
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(0,0,0);
     fullResumeData.education.forEach((edu) => {
-      // Show course and institution on the same line
       doc.text(`${edu.degree} - ${edu.institution}`, 22, y);
       doc.text(`${edu.duration}`, 150, y);
       y += 7;
