@@ -68,7 +68,7 @@ const Contact = () => {
         </div>
 
         <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-3 gap-8 mb-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
             {contactInfo.map((contact, index) => (
               <Card 
                 key={index} 
@@ -152,7 +152,7 @@ const Contact = () => {
                 </div>
               </div>
 
-              <div className="flex justify-center gap-4">
+              <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <Button 
                   className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 shadow-[var(--shadow-elegant)]"
                   asChild
