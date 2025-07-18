@@ -66,18 +66,15 @@ const LeetCode = () => {
           </div>
         </div>
 
-        {/* Stats Card */}
-        <div className="grid grid-cols-1 mb-12">
+        
           <Card className="tech-card w-full">
-            <CardContent className="p-4">
               <img
                 src={`https://leetcode-stats.vercel.app/api?username=dheerajgaur_official&theme=${theme}&t=${reloadTrigger}`}
                 alt="LeetCode Stats"
-                className="w-full h-auto rounded-lg shadow"
+                className="w-full h-auto rounded-lg "
               />
-            </CardContent>
           </Card>
-        </div>
+        {/* </div> */}
 
         {/* Call to Action */}
         <div className="mt-12 text-center">

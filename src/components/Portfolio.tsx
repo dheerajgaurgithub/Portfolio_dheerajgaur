@@ -6,7 +6,7 @@ import Skills from './Skills';
 import Experience from './Experience';
 import Projects from './Projects';
 import LeetCode from './LeetCode';
-import Resume from './Resume';
+
 import Contact from './Contact';
 import Footer from './Footer';
 
@@ -36,9 +36,6 @@ const Portfolio = () => {
           <LeetCode />
         </section>
         
-        <section id="resume">
-          <Resume />
-        </section>
         
         <section id="contact">
           <Contact />
