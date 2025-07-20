@@ -71,7 +71,7 @@ const Projects = () => {
               href="https://github.com/dheerajgaurgithub"
               target="_blank"
               rel="noopener noreferrer"
-              className="contact-link text-lg"
+              className="contact-link text-lg flex items-center gap-2"
             >
               <Github className="h-5 w-5" />
               View All on GitHub
@@ -112,6 +112,17 @@ const Projects = () => {
                       >
                         <Github className="h-5 w-5" />
                       </a>
+                      {project.live !== '#' && (
+                        <a 
+                          href={project.live}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-2 rounded-lg hover:bg-muted transition-colors"
+                          title="View Live"
+                        >
+                          <ExternalLink className="h-5 w-5" />
+                        </a>
+                      )}
                     </div>
                   </div>
 
@@ -162,6 +173,16 @@ const Projects = () => {
                       >
                         <Github className="h-4 w-4" />
                       </a>
+                      {project.live !== '#' && (
+                        <a 
+                          href={project.live}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-1 rounded hover:bg-muted transition-colors"
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                        </a>
+                      )}
                     </div>
                   </div>
 
