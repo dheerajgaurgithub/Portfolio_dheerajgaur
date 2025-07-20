@@ -21,7 +21,7 @@ const Projects = () => {
       technologies: ['HTML5', 'CSS3', 'JavaScript', 'Web Audio API'],
       github: 'https://github.com/dheerajgaurgithub/spotify-clone',
       live: '#',
-      featured: true,
+      featured: false,
       status: 'Completed'
     },
     {
@@ -29,7 +29,7 @@ const Projects = () => {
       description: 'A CRUD application for managing recipes with EJS templating. Features include adding, editing, deleting, and viewing recipes with a clean interface.',
       technologies: ['Node.js', 'Express.js', 'EJS', 'MongoDB', 'Bootstrap'],
       github: 'https://github.com/dheerajgaurgithub/Recipe-Management-System',
-      live: '#',
+      live: 'https://recipe-management-system-qt53.onrender.com/',
       featured: false,
       status: 'Completed'
     },
