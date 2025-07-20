@@ -36,8 +36,8 @@ const Projects = () => {
     {
       title: 'BhuviKart',
       description: 'E-commerce website clone with product listing, shopping cart functionality, and responsive design built with core web technologies.',
-      technologies: ['React(TSX)', 'CSS3', 'JavaScript', 'Local Storage'],
-      github: 'https://github.com/dheerajgaurgithub/amazon-clone',
+      technologies: ['React(TSX)', 'CSS3', 'Local Storage'],
+      github: 'https://github.com/dheerajgaurgithub/BhuviKart-E-Commerce-website-',
       live: 'https://dheerajgaurbhuvikart.netlify.app/',
       featured: true,
       status: 'Completed'
