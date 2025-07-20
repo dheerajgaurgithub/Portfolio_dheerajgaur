@@ -30,7 +30,7 @@ const Projects = () => {
       technologies: ['Node.js', 'Express.js', 'EJS', 'MongoDB', 'Bootstrap'],
       github: 'https://github.com/dheerajgaurgithub/Recipe-Management-System',
       live: '#',
-      featured: true,
+      featured: false,
       status: 'Completed'
     },
     {
@@ -39,7 +39,7 @@ const Projects = () => {
       technologies: ['React(TSX)', 'CSS3', 'JavaScript', 'Local Storage'],
       github: 'https://github.com/dheerajgaurgithub/amazon-clone',
       live: 'https://dheerajgaurbhuvikart.netlify.app/',
-      featured: false,
+      featured: true,
       status: 'Completed'
     },
     {
