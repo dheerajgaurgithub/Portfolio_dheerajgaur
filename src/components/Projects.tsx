@@ -30,7 +30,7 @@ const Projects = () => {
       technologies: ['Node.js', 'Express.js', 'EJS', 'MongoDB', 'Bootstrap'],
       github: 'https://github.com/dheerajgaurgithub/Recipe-Management-System',
       live: 'https://recipe-management-system-qt53.onrender.com/',
-      featured: false,
+      featured: true,
       status: 'Completed'
     },
     {
