@@ -22,7 +22,7 @@ const Projects = () => {
       github: 'https://github.com/dheerajgaurgithub/spotify-clone',
       live: '',
       featured: false,
-      status: 'Completed'
+      status: 'working'
     },
     {
       title: 'Recipe Management System',
@@ -48,7 +48,7 @@ const Projects = () => {
       technologies: ['React.js', 'Node.js', 'MongoDB', 'Express.js'],
       github: 'https://github.com/dheerajgaurgithub/test-generator',
       live: '#',
-      featured: false,
+      featured: 'working',
       status: 'Completed'
     }
   ];
