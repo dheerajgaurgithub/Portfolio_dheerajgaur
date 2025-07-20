@@ -20,7 +20,7 @@ const Projects = () => {
       description: 'A music streaming interface clone of Spotify with responsive design, playlist management, and audio controls using vanilla web technologies.',
       technologies: ['HTML5', 'CSS3', 'JavaScript', 'Web Audio API'],
       github: 'https://github.com/dheerajgaurgithub/spotify-clone',
-      live: '#',
+      live: '',
       featured: false,
       status: 'Completed'
     },
