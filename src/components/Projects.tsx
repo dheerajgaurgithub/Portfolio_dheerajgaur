@@ -43,6 +43,15 @@ const Projects = () => {
       status: 'Completed'
     },
     {
+      title: 'Employee Onboarding System',
+      description: 'Streamline your HR operations with intelligent automation, real-time collaboration, and seamless employee experiences.',
+      technologies: ['React(jSX)', 'tailwind', 'Local Storage'],
+      github: 'https://github.com/dheerajgaurgithub/Employee_On_Boarding_System',
+      live: 'https://employee-on-boarding-system.vercel.app/',
+      featured: true,
+      status: 'Completed'
+    },
+    {
       title: 'Test Generator',
       description: 'An intelligent test generation system built during Coding Blocks internship. Allows educators to create customized tests with various question types.',
       technologies: ['React.js', 'Node.js', 'MongoDB', 'Express.js'],
