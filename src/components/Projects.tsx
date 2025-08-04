@@ -59,6 +59,15 @@ const Projects = () => {
       live: '#',
       featured: 'working',
       status: 'Completed'
+    },
+    {
+      title: 'Tic-Tac-Toe Game',
+      description: 'A CRUD application for managing recipes with EJS templating. Features include adding, editing, deleting, and viewing recipes with a clean interface.',
+      technologies: ['TypeScript','CSS','JavaScript'],
+      github: 'https://github.com/dheerajgaurgithub/Tic-Tac-Toe-Game',
+      live: 'https://tic-tac-toe-game-nu-lyart.vercel.app/game?mode=pvp',
+      featured: false,
+      status: 'Completed'
     }
   ];
 
