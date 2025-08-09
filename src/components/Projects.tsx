@@ -7,11 +7,11 @@ import { Button } from '@/components/ui/button';
 const Projects = () => {
   const projects = [
     {
-      title: 'Social Media Platform',
-      description: 'A full-featured social media platform built with MERN stack. Features include user authentication, post creation, real-time messaging, and social interactions.',
-      technologies: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Socket.io', 'JWT'],
-      github: 'https://github.com/dheerajgaurgithub/social-media-platform',
-      live: '#',
+      title: 'Car Racing',
+      description: 'A thrilling 3D-lane racing game built with React, TypeScript, and HTML5 Canvas. Race through neon-lit highways, avoid obstacles, collect power-ups, and achieve the highest score!',
+      technologies: ['React.js', 'TypeScript', 'HTML5 Canvas', 'CSS3'],
+      github: 'https://github.com/dheerajgaurgithub/Car_RacingGame',
+      live: 'https://dheerajgaurracinggame.netlify.app/',
       featured: true,
       status: 'Completed'
     },
