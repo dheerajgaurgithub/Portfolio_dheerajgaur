@@ -55,9 +55,9 @@ const Projects = () => {
       title: 'Test Generator',
       description: 'An intelligent test generation system built during Coding Blocks internship. Allows educators to create customized tests with various question types.',
       technologies: ['React.js', 'Node.js', 'MongoDB', 'Express.js'],
-      github: 'https://github.com/dheerajgaurgithub/test-generator',
-      live: '#',
-      featured: 'working',
+      github: 'https://github.com/dheerajgaurgithub/Jovac-Project',
+      live: 'https://jovac-project-lilac.vercel.app/',
+      featured: true,
       status: 'Completed'
     },
     {
