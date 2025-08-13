@@ -7,8 +7,8 @@ import { Button } from '@/components/ui/button';
 const Projects = () => {
   const projects = [
     {
-      title: 'Car Racing',
-      description: 'A thrilling 3D-lane racing game built with React, TypeScript, and HTML5 Canvas. Race through neon-lit highways, avoid obstacles, collect power-ups, and achieve the highest score!',
+      title: 'Car Racing Game',
+      description: 'A thrilling web application racing game with modern UI and engaging gameplay mechanics.',
       technologies: ['React.js', 'TypeScript', 'HTML5 Canvas', 'CSS3'],
       github: 'https://github.com/dheerajgaurgithub/Car_RacingGame',
       live: 'https://dheerajgaurracinggame.netlify.app/',
@@ -16,26 +16,17 @@ const Projects = () => {
       status: 'Completed'
     },
     {
-      title: 'Spotify Clone',
-      description: 'A music streaming interface clone of Spotify with responsive design, playlist management, and audio controls using vanilla web technologies.',
-      technologies: ['HTML5', 'CSS3', 'JavaScript', 'Web Audio API'],
-      github: 'https://github.com/dheerajgaurgithub/spotify-clone',
-      live: '',
-      featured: false,
-      status: 'working'
-    },
-    {
-      title: 'Recipe Management System',
-      description: 'A CRUD application for managing recipes with EJS templating. Features include adding, editing, deleting, and viewing recipes with a clean interface.',
-      technologies: ['Node.js', 'Express.js', 'EJS', 'MongoDB', 'Bootstrap'],
-      github: 'https://github.com/dheerajgaurgithub/Recipe-Management-System',
-      live: 'https://recipe-management-system-qt53.onrender.com/',
-      featured: false,
+      title: 'Jovac Project - TestGenerator',
+      description: 'TestGenerator is a comprehensive, AI-powered test creation and management platform built with the MERN stack. It enables educators to automatically generate tests from PDF documents and provides student management features.',
+      technologies: ['MERN Stack', 'MongoDB', 'Express.js', 'React.js', 'Node.js'],
+      github: 'https://github.com/dheerajgaurgithub/Jovac-Project',
+      live: 'https://jovac-project-lilac.vercel.app/',
+      featured: true,
       status: 'Completed'
     },
     {
-      title: 'BhuviKart',
-      description: 'E-commerce website clone with product listing, shopping cart functionality, and responsive design built with core web technologies.',
+      title: 'BhuviKart E-Commerce',
+      description: 'A fully responsive e-commerce website built using React(TSX) and CSS only – no frameworks or libraries. Features home page with product listings, product details, add to cart functionality, and checkout process.',
       technologies: ['React(TSX)', 'CSS3', 'Local Storage'],
       github: 'https://github.com/dheerajgaurgithub/BhuviKart-E-Commerce-website-',
       live: 'https://dheerajgaurbhuvikart.netlify.app/',
@@ -43,31 +34,85 @@ const Projects = () => {
       status: 'Completed'
     },
     // {
-    //   title: 'Employee Onboarding System',
-    //   description: 'Streamline your HR operations with intelligent automation, real-time collaboration, and seamless employee experiences.',
-    //   technologies: ['React(jSX)', 'tailwind', 'Local Storage'],
-    //   github: 'https://github.com/dheerajgaurgithub/Employee_On_Boarding_System',
-    //   live: 'https://employee-on-boarding-system.vercel.app/',
+    //   title: 'Spotify Clone',
+    //   description: 'A full-stack Spotify Clone using MERN (MongoDB, Express, React, Node.js) with Vite and Tailwind CSS. Features modern UI, admin can add songs, playlists & albums, and user authentication.',
+    //   technologies: ['MERN Stack', 'Vite', 'Tailwind CSS', 'MongoDB'],
+    //   github: 'https://github.com/dheerajgaurgithub/Spotify-Clone',
+    //   live: '',
     //   featured: true,
     //   status: 'Completed'
     // },
+    // {
+    //   title: 'Social Media App',
+    //   description: 'A full-featured social media web application built with modern web technologies. Users can register, log in, create posts, like, comment, follow/unfollow others, and chat in real-time.',
+    //   technologies: ['MERN Stack', 'Socket.io', 'Real-time Chat', 'Authentication'],
+    //   github: 'https://github.com/dheerajgaurgithub/Social_Media_App',
+    //   live: '',
+    //   featured: false,
+    //   status: 'Completed'
+    // },
+    // {
+    //   title: 'Weather App',
+    //   description: 'A modern weather application built with React.js frontend and Node.js backend that allows users to search for current weather information by city with real-time data.',
+    //   technologies: ['React.js', 'Node.js', 'Weather API', 'Responsive Design'],
+    //   github: 'https://github.com/dheerajgaurgithub/Weather-App',
+    //   live: '',
+    //   featured: false,
+    //   status: 'Completed'
+    // },
+    // {
+    //   title: 'CleanBin - Waste Management',
+    //   description: 'CleanBin is a full-stack, real-world waste management and housekeeping platform offering subscription-based door-to-door dustbin cleaning and home services.',
+    //   technologies: ['Node.js', 'Express.js', 'MongoDB', 'Full-Stack'],
+    //   github: 'https://github.com/dheerajgaurgithub/cleanbin-doorstep-waste-solution',
+    //   live: '',
+    //   featured: false,
+    //   status: 'Completed'
+    // },
     {
-      title: 'Test Generator',
-      description: 'An intelligent test generation system built during Coding Blocks internship. Allows educators to create customized tests with various question types.',
-      technologies: ['React.js', 'Node.js', 'MongoDB', 'Express.js'],
-      github: 'https://github.com/dheerajgaurgithub/Jovac-Project',
-      live: 'https://jovac-project-lilac.vercel.app/',
-      featured: true,
+      title: 'Recipe Management System',
+      description: 'CRUD Operation system for recipe management - add, delete, update recipes with a clean and intuitive interface.',
+      technologies: ['Node.js', 'Express.js', 'EJS', 'MongoDB', 'Bootstrap'],
+      github: 'https://github.com/dheerajgaurgithub/Recipe-Management-System',
+      live: 'https://recipe-management-system-qt53.onrender.com/',
+      featured: false,
       status: 'Completed'
     },
     {
       title: 'Tic-Tac-Toe Game',
-      description: 'A CRUD application for managing recipes with EJS templating. Features include adding, editing, deleting, and viewing recipes with a clean interface.',
-      technologies: ['TypeScript','CSS','JavaScript'],
+      description: 'A classic Tic Tac Toe game showcasing the power of combining HTML, CSS, JavaScript, and React with modern UI and interactive gameplay.',
+      technologies: ['HTML5', 'CSS3', 'JavaScript', 'React'],
       github: 'https://github.com/dheerajgaurgithub/Tic-Tac-Toe-Game',
       live: 'https://tic-tac-toe-game-nu-lyart.vercel.app/game?mode=pvp',
       featured: false,
       status: 'Completed'
+    },
+    {
+      title: 'Todo List App',
+      description: 'A clean and intuitive todo list application for managing daily tasks and productivity. Features task creation, completion tracking, and organized task management.',
+      technologies: ['HTML5', 'CSS3', 'JavaScript', 'Local Storage'],
+      github: 'https://github.com/dheerajgaurgithub/todoList',
+      live: 'https://dheerajstodolist.netlify.app/',
+      featured: false,
+      status: 'Completed'
+    },
+    {
+      title: 'Propose Your Crush',
+      description: 'A fun and interactive web application designed to help users propose to their crush in a creative and engaging way. Built with modern web technologies.',
+      technologies: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design'],
+      github: 'https://github.com/dheerajgaurgithub/propsal',
+      live: 'https://proposedheeraj.netlify.app/',
+      featured: false,
+      status: 'Completed'
+    },
+    {
+      title: 'LeetCode Problems',
+      description: 'A collection of my solutions to LeetCode problems in Java. Each solution is clean, well-commented, and optimized for readability and performance. Categorized by topic and difficulty.',
+      technologies: ['Java', 'Data Structures', 'Algorithms', 'Problem Solving'],
+      github: 'https://github.com/dheerajgaurgithub/LeetCode_Problems',
+      live: '',
+      featured: false,
+      status: 'Ongoing'
     }
   ];
 

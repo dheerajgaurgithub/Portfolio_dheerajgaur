@@ -79,8 +79,9 @@ const Hero = () => {
           </div>
 
           <p className="text-sm xs:text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-            Passionate about creating innovative solutions with modern web technologies.
-            Currently pursuing B.Tech CSE and building amazing projects.
+            🔹 B.Tech CSE Student | GLA University<br/>
+            🔹 Skills: Java | Web Dev | Data Structures & Algorithms<br/>
+            📌 Always learning, building, and sharing
           </p>
 
           {/* Buttons */}
