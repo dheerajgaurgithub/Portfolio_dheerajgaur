@@ -33,15 +33,15 @@ const Projects = () => {
       featured: true,
       status: 'Completed'
     },
-    // {
-    //   title: 'Spotify Clone',
-    //   description: 'A full-stack Spotify Clone using MERN (MongoDB, Express, React, Node.js) with Vite and Tailwind CSS. Features modern UI, admin can add songs, playlists & albums, and user authentication.',
-    //   technologies: ['MERN Stack', 'Vite', 'Tailwind CSS', 'MongoDB'],
-    //   github: 'https://github.com/dheerajgaurgithub/Spotify-Clone',
-    //   live: '',
-    //   featured: true,
-    //   status: 'Completed'
-    // },
+    {
+      title: 'E-Reader Platform',
+      description: 'A full-stack E-Reader Platform using MERN (MongoDB, Express, React, Node.js) with Vite and Tailwind CSS. Features modern UI, admin can add songs, playlists & albums, and user authentication.',
+      technologies: ['MERN Stack', 'Vite', 'Material-UI CSS', 'MongoDB'],
+      github: 'https://github.com/dheerajgaurgithub/E-Reader-integraminds',
+      live: 'https://e-reader-integraminds-figg.vercel.app/',
+      featured: true,
+      status: 'Completed'
+    },
     // {
     //   title: 'Social Media App',
     //   description: 'A full-featured social media web application built with modern web technologies. Users can register, log in, create posts, like, comment, follow/unfollow others, and chat in real-time.',
