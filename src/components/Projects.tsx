@@ -11,7 +11,7 @@ const Projects = () => {
       description: 'A thrilling web application racing game with modern UI and engaging gameplay mechanics.',
       technologies: ['React.js', 'TypeScript', 'HTML5 Canvas', 'CSS3'],
       github: 'https://github.com/dheerajgaurgithub/Car_RacingGame',
-      live: 'https://dheerajgaurracinggame.netlify.app/',
+      live: 'https://car-racing-game-beta-six.vercel.app/',
       featured: true,
       status: 'Completed'
     },
