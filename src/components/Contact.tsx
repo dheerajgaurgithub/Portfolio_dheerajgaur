@@ -207,7 +207,7 @@ const ContactForm: React.FC = () => {
         : undefined;
       const apiBase = forcedProdBase
         || env.VITE_CONTACT_API
-        || (env.DEV ? 'http://localhost:5000/api' : 'https://portfolio-dheerajgaur.onrender.com/api');
+        || (env.DEV ? 'http://localhost:5000/api/contact' : 'https://portfolio-dheerajgaur.onrender.com/api/contact');
       console.log('[Contact] Using API base:', apiBase);
       const res = await fetch(`${apiBase}/contact`, {
         method: 'POST',

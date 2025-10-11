@@ -49,6 +49,14 @@ app.post('/api/contact', async (req, res) => {
       auth: { user: SMTP_USER, pass: SMTP_PASS },
     });
 
+    // Verify SMTP configuration before attempting to send
+    try {
+      await transporter.verify();
+    } catch (e) {
+      console.error('SMTP verify failed:', e?.code, e?.message);
+      return res.status(500).json({ error: 'SMTP verify failed', code: e?.code, msg: e?.message });
+    }
+
     await transporter.sendMail({
       from: CONTACT_FROM,
       to: CONTACT_TO,
@@ -63,8 +71,8 @@ app.post('/api/contact', async (req, res) => {
 
     res.json({ ok: true });
   } catch (err) {
-    console.error('Email send error:', err);
-    res.status(500).json({ error: 'Failed to send message' });
+    console.error('Email send error:', err?.code, err?.message);
+    res.status(500).json({ error: 'Failed to send message', code: err?.code, msg: err?.message });
   }
 });
 
