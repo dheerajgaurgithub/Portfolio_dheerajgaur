@@ -3,7 +3,7 @@ import { Github, Linkedin, Mail, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import profileImage from '@/assets/dp.png';
 import jsPDF from "jspdf";
-const RESUME_DOWNLOAD = 'https://drive.google.com/file/d/1_ttrg500IZdLJVGIOG751GuI8IbcQlKX/view?usp=sharing';
+const RESUME_DOWNLOAD = 'https://drive.google.com/file/d/1m4Nz0dJURdkVWUXX2CZm8w6f77ejYtfb/view?usp=sharing';
 const Hero = () => {
   const [currentText, setCurrentText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
