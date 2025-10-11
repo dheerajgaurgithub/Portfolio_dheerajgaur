@@ -200,7 +200,9 @@ const ContactForm: React.FC = () => {
     setSubmitting(true);
     setStatus(null);
     try {
-      const endpoint = (import.meta as any).env?.DEV ? 'http://localhost:5000/api/contact' : '/api/contact';
+      const endpoint = (import.meta as any).env?.DEV
+        ? 'http://localhost:5000/api/contact'
+        : 'https://portfolio-dheerajgaur.onrender.com/api/contact';
       const res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

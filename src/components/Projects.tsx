@@ -90,7 +90,7 @@ const Projects = () => {
       description: 'A clean and intuitive todo list application for managing daily tasks and productivity. Features task creation, completion tracking, and organized task management.',
       technologies: ['HTML5', 'CSS3', 'JavaScript', 'Local Storage'],
       github: 'https://github.com/dheerajgaurgithub/todoList',
-      live: 'https://dheerajstodolist.netlify.app/',
+      live: 'https://proposeyourcrushnow.netlify.app/',
       featured: false,
       status: 'Completed'
     },

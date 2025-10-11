@@ -5,32 +5,19 @@ const nodemailer = require('nodemailer');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const ALLOWED_ORIGINS = [
-  'https://dheerajgaurofficial.netlify.app',
-  'https://dheerajgaurofficial.netlify.app/',
-  'http://localhost:8080',
-  'http://localhost:8080/'
-];
+// Allow all origins (no credentials). For cookies/auth, switch to an explicit allowlist.
 app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin) return callback(null, true); // allow server-to-server or curl
-    const allowed = ALLOWED_ORIGINS.includes(origin);
-    callback(allowed ? null : new Error('Not allowed by CORS'), allowed);
-  },
-  credentials: true,
-  methods: ['GET','POST','OPTIONS']
+  origin: '*',
+  credentials: false,
+  methods: ['GET','POST','OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 // Handle preflight requests without using a wildcard path to avoid path-to-regexp errors
 app.use((req, res, next) => {
   if (req.method === 'OPTIONS') {
-    const origin = req.headers.origin;
-    if (origin && ALLOWED_ORIGINS.includes(origin)) {
-      res.header('Access-Control-Allow-Origin', origin);
-      res.header('Vary', 'Origin');
-    }
+    res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.header('Access-Control-Allow-Credentials', 'true');
     return res.sendStatus(204);
   }
   next();
