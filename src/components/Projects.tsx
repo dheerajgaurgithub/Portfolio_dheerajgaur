@@ -51,7 +51,17 @@ const Projects = () => {
     },
     {
       title: 'BhuviKart E-Commerce',
-      description: 'A fully responsive e-commerce website built using React(TSX) and CSS only – no frameworks or libraries. Features home page with product listings, product details, add to cart functionality, and checkout process.',
+      description: `BhuviKart is a fully responsive and dynamic e-commerce web application built entirely with React (TypeScript + TSX) and pure CSS — without using any external frameworks or libraries. The project showcases clean UI design, optimized performance, and component-based architecture.
+      Key Features:
+      - 🏠 Modern and responsive home page with interactive product listings.
+      - 🛒 Product detail pages with smooth navigation and add-to-cart functionality.
+      - 💳 Complete checkout flow powered by Local Storage for cart management.
+      - 🔍 Dynamic filtering and product rendering using reusable React components.
+      - ⚡ Lightweight and fast performance optimized with TypeScript and Vite setup.
+      - Well-structured React (TSX) components for modular and scalable development.
+      - Clean folder structure with separate sections for components, styles, and assets.
+      - Implementation of local state management and local storage persistence.
+      - Commented and readable code, perfect for learning or extending into a backend-integrated e-commerce app.`,
       technologies: ['React(TSX)', 'CSS3', 'Local Storage'],
       github: 'https://github.com/dheerajgaurgithub/BhuviKart-E-Commerce-website-',
       live: 'https://dheerajgaurbhuvikart.netlify.app/',
