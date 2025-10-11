@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -25,14 +26,14 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use((req, _res, next) => { console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`); next(); });
 
-// Hardcoded SMTP settings (as requested)
-const SMTP_HOST = 'smtp.gmail.com';
-const SMTP_PORT = 587;
-const SMTP_USER = 'dheerajgaur.0fficial@gmail.com';
-const SMTP_PASS_WITH_SPACES = 'xmdo mwjn zmwe anoh';
-const SMTP_PASS = SMTP_PASS_WITH_SPACES.replace(/\s+/g, '');
-const CONTACT_TO = 'dheerajgaur.0fficial@gmail.com';
-const CONTACT_FROM = 'dheerajgaur.0fficial@gmail.com';
+// SMTP settings (prefer environment variables)
+const SMTP_HOST = process.env.SMTP_HOST || 'smtp.gmail.com';
+const SMTP_PORT = Number(process.env.SMTP_PORT || 587);
+const RAW_PASS = process.env.SMTP_PASS || '';
+const SMTP_PASS = RAW_PASS.replace(/\s+/g, '');
+const SMTP_USER = process.env.SMTP_USER || '';
+const CONTACT_TO = process.env.CONTACT_TO || SMTP_USER;
+const CONTACT_FROM = process.env.CONTACT_FROM || SMTP_USER;
 
 app.post('/api/contact', async (req, res) => {
   const { name, email, message } = req.body || {};
@@ -68,6 +69,7 @@ app.post('/api/contact', async (req, res) => {
 });
 
 app.get('/api/health', (req, res) => res.json({ ok: true }));
+app.get('/api/contact', (req, res) => res.json({ ok: true, hint: 'POST name, email, message to send email' }));
 app.use((req, res) => { res.status(404).json({ error: 'Not Found', path: req.path }); });
 
 app.listen(PORT, () => {
