@@ -125,7 +125,7 @@ const Hero = () => {
               <Linkedin className="h-5 w-5 sm:h-6 sm:w-6" />
             </a>
             <a 
-              href="mailto:dheerajgaur.0fficial@gmail.com" 
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=dheerajgaur.0fficial@gmail.com" 
               className="contact-link p-2 sm:p-3"
               aria-label="Email Contact"
             >

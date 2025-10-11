@@ -24,7 +24,7 @@ const Projects = () => {
     },
     {
       title: 'ShikFy',
-      description: 'An educational platform delivering curated content and a responsive interface for learners.',
+      description: 'A social media platform for young youth to connect, share, and engage with their peers.',
       technologies: ['React', 'JavaScript', 'CSS'],
       github: 'https://github.com/dheerajgaurgithub/Shikfy',
       live: 'https://shikfy.netlify.app/',
@@ -60,8 +60,14 @@ const Projects = () => {
     },
     {
       title: 'E-Reader Platform',
-      description: 'A full-stack E-Reader Platform using MERN (MongoDB, Express, React, Node.js) with Vite and Tailwind CSS. Features modern UI, admin can add songs, playlists & albums, and user authentication.',
-      technologies: ['MERN Stack', 'Vite', 'Material-UI CSS', 'MongoDB'],
+      description: `An advanced full-stack E-Reader web application built with Flask (Python) on the backend and React (Vite + Tailwind CSS) on the frontend. The platform delivers a seamless digital reading and listening experience with dynamic content management.
+      It includes secure user authentication, an admin dashboard for uploading and managing songs, playlists, and albums, and a personalized user interface for interactive content engagement. The project is optimized for high performance, responsive design, and modular scalability.
+      - Complete Flask backend with RESTful API endpoints for authentication, content management, and user data.
+      - React frontend integrated with Flask using fetch/axios for API communication.
+      - Database integration using MongoDB for dynamic data storage.
+      - Configuration for environment variables, deployment setup (Vercel + Flask server), and well-structured code with comments for easy understanding.
+      - Admin and user modules separated cleanly for scalability and collaboration.`,
+      technologies:['Flask', 'React', 'Vite', 'Tailwind CSS', 'MongoDB', 'REST API'],
       github: 'https://github.com/dheerajgaurgithub/E-Reader-integraminds',
       live: 'https://e-reader-integraminds-figg.vercel.app/',
       featured: true,

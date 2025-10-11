@@ -20,7 +20,7 @@ const Footer = () => {
     {
       name: 'Email',
       icon: Mail,
-      url: 'mailto:dheerajgaur.0fficial@gmail.com',
+      url: 'https://mail.google.com/mail/?view=cm&fs=1&to=dheerajgaur.0fficial@gmail.com',
       color: 'hover:text-red-600'
     }
   ];
