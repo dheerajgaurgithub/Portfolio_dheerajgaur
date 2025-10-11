@@ -6,20 +6,48 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Allow all origins (no credentials). For cookies/auth, switch to an explicit allowlist.
+// CORS allowlist: default to your Netlify domain and common localhost ports; can be overridden via ALLOWED_ORIGINS env (comma-separated)
+const DEFAULT_ALLOWED = [
+  'https://dheerajgaurofficial.netlify.app',
+  'https://dheerajgaurofficial.netlify.app/',
+  'http://localhost:5173',
+  'http://localhost:5173/',
+  'http://localhost:5000',
+  'http://localhost:5000/'
+];
+const ALLOWED = (process.env.ALLOWED_ORIGINS || '')
+  .split(',')
+  .map(s => s.trim())
+  .filter(Boolean);
+const ALLOWLIST = ALLOWED.length ? ALLOWED : DEFAULT_ALLOWED;
+
 app.use(cors({
-  origin: '*',
+  origin: (origin, cb) => {
+    if (!origin) return cb(null, true); // non-browser or same-origin
+    const ok = ALLOWLIST.includes(origin);
+    return cb(ok ? null : new Error('Not allowed by CORS'), ok);
+  },
   credentials: false,
   methods: ['GET','POST','OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
-// Handle preflight requests without using a wildcard path to avoid path-to-regexp errors
+// Handle preflight explicitly and echo allowed origin
 app.use((req, res, next) => {
   if (req.method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Origin', '*');
+    const origin = req.headers.origin;
+    if (origin && ALLOWLIST.includes(origin)) {
+      res.header('Access-Control-Allow-Origin', origin);
+      res.header('Vary', 'Origin');
+    }
     res.header('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     return res.sendStatus(204);
+  }
+  // For normal requests, echo allowed origin so browser sees CORS header
+  const origin = req.headers.origin;
+  if (origin && ALLOWLIST.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Vary', 'Origin');
   }
   next();
 });
