@@ -201,7 +201,12 @@ const ContactForm: React.FC = () => {
     setStatus(null);
     try {
       const env = (import.meta as any).env || {};
-      const apiBase = env.VITE_CONTACT_API
+      const origin = typeof window !== 'undefined' ? window.location.origin : '';
+      const forcedProdBase = origin.includes('dheerajgaurofficial.netlify.app')
+        ? 'https://portfolio-dheerajgaur.onrender.com/api'
+        : undefined;
+      const apiBase = forcedProdBase
+        || env.VITE_CONTACT_API
         || (env.DEV ? 'http://localhost:5000/api' : 'https://portfolio-dheerajgaur.onrender.com/api');
       console.log('[Contact] Using API base:', apiBase);
       const res = await fetch(`${apiBase}/contact`, {
