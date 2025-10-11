@@ -207,7 +207,7 @@ const ContactForm: React.FC = () => {
         : undefined;
       const apiBase = forcedProdBase
         || env.VITE_CONTACT_API
-        || (env.DEV ? 'http://localhost:5000/api/contact' : 'https://portfolio-dheerajgaur.onrender.com/api/contact');
+        || (env.DEV ? 'http://localhost:5000/api' : 'https://portfolio-dheerajgaur.onrender.com/api');
       console.log('[Contact] Using API base:', apiBase);
       const res = await fetch(`${apiBase}/contact`, {
         method: 'POST',
@@ -221,8 +221,9 @@ const ContactForm: React.FC = () => {
         const data = await res.json().catch(() => ({}));
         setStatus({ ok: false, msg: data?.error || 'Failed to send. Please try again later.' });
       }
-    } catch {
-      setStatus({ ok: false, msg: 'Network error. Please try again.' });
+    } catch (err: any) {
+      const msg = (err && (err.message || String(err))) || 'Network error';
+      setStatus({ ok: false, msg });
     } finally {
       setSubmitting(false);
     }
