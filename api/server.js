@@ -70,6 +70,21 @@ app.post('/api/contact', async (req, res) => {
   }
 
   try {
+    // Validate required SMTP credentials before creating transporter
+    if (!SMTP_USER || !SMTP_PASS) {
+      console.error('SMTP creds missing:', {
+        userPresent: Boolean(SMTP_USER),
+        passPresent: Boolean(SMTP_PASS)
+      });
+      return res.status(500).json({
+        error: 'SMTP credentials missing',
+        details: {
+          SMTP_USER_present: Boolean(SMTP_USER),
+          SMTP_PASS_present: Boolean(SMTP_PASS)
+        }
+      });
+    }
+
     const transporter = nodemailer.createTransport({
       host: SMTP_HOST,
       port: SMTP_PORT,
