@@ -16,7 +16,7 @@ export default async function handler(req: any, res: any) {
   const SMTP_HOST = 'smtp.gmail.com';
   const SMTP_PORT = 587;
   const SMTP_USER = 'dheerajgaur.0fficial@gmail.com';
-  const SMTP_PASS_WITH_SPACES = 'xmdo mwjn zmwe anoh';
+  const SMTP_PASS_WITH_SPACES = 'msct xvep hduw hsay';
   const SMTP_PASS = SMTP_PASS_WITH_SPACES.replace(/\s+/g, '');
   const CONTACT_TO = 'dheerajgaur.0fficial@gmail.com';
   const CONTACT_FROM = 'dheerajgaur.0fficial@gmail.com';
