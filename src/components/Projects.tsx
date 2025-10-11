@@ -10,12 +10,19 @@ import bhuvikartImg from './project images/bhuvikart.png';
 import jovacImg from './project images/jovacproject.png';
 import ereaderImg from './project images/ereader.png';
 import proposeImg from './project images/propose.png';
-
+import todolistImg from './project images/todolist.png';
+import tictactoeImg from './project images/tictactoe.png';
 const Projects = () => {
   const projects = [
     {
       title: 'EarnByCode',
-      description: 'A platform focused on coding-based opportunities with resources, tasks, and a clean UX for learners and contributors.',
+      description: `EarnByCode is an interactive platform designed to empower learners and developers through coding-based opportunities, challenges, and curated learning resources. Built using React, TypeScript, and TailwindCSS, the platform offers a clean, responsive, and engaging user experience focused on growth and collaboration.
+      Key Features:
+      - 💻 Explore coding challenges, resources, and learning materials in one place.
+      - 🚀 Interactive task dashboard allowing contributors to add, update, and manage coding opportunities.
+      - 🧠 Learner-friendly design with a focus on clarity, performance, and accessibility.
+      - 🌐 Fully responsive UI built with TailwindCSS, ensuring a seamless experience across all devices.
+      - ⚙️ Modular architecture and clean TypeScript codebase for scalability and maintainability.`,
       technologies: ['React', 'TypeScript', 'TailwindCSS'],
       github: 'https://github.com/dheerajgaurgithub/EarnByCode',
       live: 'https://earnbycode-ebc.vercel.app/',
@@ -24,8 +31,15 @@ const Projects = () => {
     },
     {
       title: 'ShikFy',
-      description: 'A social media platform for young youth to connect, share, and engage with their peers.',
-      technologies: ['React', 'JavaScript', 'CSS'],
+      description: `ShikFy is a modern social media platform built with React, designed to help young users connect, share moments, and engage with their community in an interactive environment. The platform focuses on simplicity, speed, and seamless user experience — featuring a responsive interface inspired by real-world social platforms.
+      Key Features:
+      - 💬 Users can post updates, share photos, and interact through likes and comments.
+      - 👥 Dynamic feed system with real-time post rendering and profile interactions.
+      - 🔐 Authentication and session handling for secure access and personalized experience.
+      - 🌙 Modern UI with smooth animations, responsive layouts, and mobile-friendly design.
+      - ⚙️ Clean, modular code structure built entirely with React and CSS — easy to extend with a backend or database integration.
+      `,
+      technologies: ['React', 'JavaScript (ES6+)', 'CSS3'],
       github: 'https://github.com/dheerajgaurgithub/Shikfy',
       live: 'https://shikfy.netlify.app/',
       featured: true,
@@ -33,7 +47,13 @@ const Projects = () => {
     },
     {
       title: 'Car Racing Game',
-      description: 'A thrilling web application racing game with modern UI and engaging gameplay mechanics.',
+      description: `An interactive and thrilling web-based car racing game built using React.js and TypeScript, featuring smooth gameplay and visually appealing UI. The game utilizes HTML5 Canvas for real-time rendering and animations, offering a fast, responsive, and immersive racing experience directly in the browser.
+      Key Features:
+      - 🏎️ Real-time racing mechanics using HTML5 Canvas for high-performance rendering.
+      - 🎮 Player-controlled car with keyboard interactions and collision detection.
+      - ⚡ Dynamic obstacle generation and scoring system to increase difficulty as you progress.
+      - 🎨 Responsive and modern UI designed with pure CSS3 and React components.
+      - 💾 Optimized state management and animation loops for smooth gameplay.`,
       technologies: ['React.js', 'TypeScript', 'HTML5 Canvas', 'CSS3'],
       github: 'https://github.com/dheerajgaurgithub/Car_RacingGame',
       live: 'https://car-racing-game-beta-six.vercel.app/',
@@ -42,7 +62,14 @@ const Projects = () => {
     },
     {
       title: 'Jovac Project - TestGenerator',
-      description: 'TestGenerator is a comprehensive, AI-powered test creation and management platform built with the MERN stack. It enables educators to automatically generate tests from PDF documents and provides student management features.',
+      description: `TestGenerator is a powerful AI-powered test creation and management platform designed for educators, built using the MERN stack (MongoDB, Express.js, React.js, Node.js). The platform streamlines the process of generating tests from PDF documents, while providing robust student management and performance tracking features.
+      Key Features:
+      - 📄 Automatic test generation from PDF documents using AI-powered parsing.
+      - 👩‍🏫 Educator dashboard to manage students, tests, and results efficiently.
+      - 📝 Student module for taking tests, tracking progress, and viewing scores.
+      - 🌐 Responsive and modern UI built with React.js and CSS for seamless interaction.
+      - ⚙️ Modular backend with Express.js and MongoDB ensuring scalability and secure data handling.
+      `,
       technologies: ['MERN Stack', 'MongoDB', 'Express.js', 'React.js', 'Node.js'],
       github: 'https://github.com/dheerajgaurgithub/Jovac-Project',
       live: 'https://jovac-project-lilac.vercel.app/',
@@ -58,10 +85,7 @@ const Projects = () => {
       - 💳 Complete checkout flow powered by Local Storage for cart management.
       - 🔍 Dynamic filtering and product rendering using reusable React components.
       - ⚡ Lightweight and fast performance optimized with TypeScript and Vite setup.
-      - Well-structured React (TSX) components for modular and scalable development.
-      - Clean folder structure with separate sections for components, styles, and assets.
-      - Implementation of local state management and local storage persistence.
-      - Commented and readable code, perfect for learning or extending into a backend-integrated e-commerce app.`,
+      `,
       technologies: ['React(TSX)', 'CSS3', 'Local Storage'],
       github: 'https://github.com/dheerajgaurgithub/BhuviKart-E-Commerce-website-',
       live: 'https://dheerajgaurbhuvikart.netlify.app/',
@@ -94,25 +118,51 @@ const Projects = () => {
     },
     {
       title: 'Tic-Tac-Toe Game',
-      description: 'A classic Tic Tac Toe game showcasing the power of combining HTML, CSS, JavaScript, and React with modern UI and interactive gameplay.',
+      description: `Tic-Tac-Toe Game is a modern take on the classic game, built with React, HTML5, CSS3, and JavaScript. The platform combines a sleek, interactive UI with smooth gameplay mechanics, making it enjoyable for players of all ages.
+Key Features:
+- 🎮 Play against another player with real-time interactive moves.
+- 🌐 Responsive design ensuring the game works seamlessly on desktop and mobile devices.
+- ⚡ Modern UI with animations for a polished and engaging user experience.
+- 🔄 Reset or replay the game easily with a single click.
+- 👨‍💻 Modular React components for game board, squares, and score tracking, making the codebase clean and maintainable.`,
       technologies: ['HTML5', 'CSS3', 'JavaScript', 'React'],
       github: 'https://github.com/dheerajgaurgithub/Tic-Tac-Toe-Game',
-      live: 'https://tic-tac-toe-game-nu-lyart.vercel.app/game?mode=pvp',
-      featured: false,
+      live: 'https://tic-tac-toe-game-nu-lyart.vercel.app/',
+      featured: true,
       status: 'Completed'
     },
     {
       title: 'Todo List App',
-      description: 'A clean and intuitive todo list application for managing daily tasks and productivity. Features task creation, completion tracking, and organized task management.',
+      description: `Todo List App is a clean, intuitive, and responsive web application designed to help users manage daily tasks efficiently. Built with HTML5, CSS3, and JavaScript, it focuses on simplicity, productivity, and smooth user experience.
+Key Features:
+- ✅ Add, edit, and delete tasks with ease.
+- 📌 Mark tasks as complete and track progress dynamically.
+- 📂 Organize tasks by categories or priorities (optional extensions possible).
+- 💾 Persistent task storage using Local Storage for data retention across sessions.
+- 🌐 Fully responsive design, ensuring usability across desktop and mobile devices.
+`,
       technologies: ['HTML5', 'CSS3', 'JavaScript', 'Local Storage'],
       github: 'https://github.com/dheerajgaurgithub/todoList',
-      live: 'https://proposeyourcrushnow.netlify.app/',
-      featured: false,
+      live: 'https://dheerajstodolist.netlify.app/',
+      featured: true,
       status: 'Completed'
     },
     {
       title: 'Propose Your Crush',
-      description: 'A fun and interactive web application designed to help users propose to their crush in a creative and engaging way. Built with modern web technologies.',
+      description: `Propose Your Crush is a fun, interactive web application that allows users to express their feelings creatively. Designed with modern web technologies, the platform makes the proposal experience playful, engaging, and visually appealing.
+
+Key Features:
+- 💌 Fun and interactive UI with animations to enhance user experience.
+- 🎨 Creative proposal templates allowing personalized messages.
+- 🌐 Fully responsive design ensuring smooth experience on all devices.
+- ⚡ Lightweight and fast-loading using pure HTML5, CSS3, and JavaScript.
+- 👨‍💻 Easy to extend or customize for additional features or themes.
+
+GitHub Repository Overview:
+- Clean and well-commented HTML, CSS, and JavaScript codebase.
+- Organized folder structure for assets, scripts, and styles.
+- Interactive animations implemented with CSS and vanilla JS.
+- Simple and beginner-friendly project for learning or inspiration.`,
       technologies: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design'],
       github: 'https://github.com/dheerajgaurgithub/propsal',
       live: 'https://proposedheeraj.netlify.app/',
@@ -230,7 +280,7 @@ const Projects = () => {
             style={{animationDelay: `${index * 0.1}s`}}
           >
             <CardContent 
-              className="p-4 sm:p-6 lg:p-8 h-full flex flex-col relative text-white transition-all duration-300 brightness-110 group-hover:brightness-100"
+              className="p-4 sm:p-6 lg:p-8 h-64 sm:h-72 lg:h-80 flex flex-col relative text-white transition-all duration-300 brightness-110 group-hover:brightness-100"
               style={{ 
                 backgroundImage: 
                   project.title === 'EarnByCode' ? `url(${ebcImg})` :
@@ -240,6 +290,8 @@ const Projects = () => {
                   project.title === 'Jovac Project - TestGenerator' ? `url(${jovacImg})` :
                   project.title === 'E-Reader Platform' ? `url(${ereaderImg})` :
                   project.title === 'Propose Your Crush' ? `url(${proposeImg})` :
+                  project.title === 'Tic-Tac-Toe Game' ? `url(${tictactoeImg})` :
+                  project.title === 'Todo List App' ? `url(${todolistImg})` :
                   (project.live !== '#' ? `url(${screenshotUrl(project.live)})` : undefined),
                 backgroundSize: 'cover',
                 backgroundPosition: 'center'
