@@ -1,11 +1,36 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Github, ExternalLink } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import ebcImg from './project images/ebc.png';
+import shikfyImg from './project images/shikfy.png';
+import lanracerImg from './project images/lanracer.png';
+import bhuvikartImg from './project images/bhuvikart.png';
+import jovacImg from './project images/jovacproject.png';
+import ereaderImg from './project images/ereader.png';
+import proposeImg from './project images/propose.png';
 
 const Projects = () => {
   const projects = [
+    {
+      title: 'EarnByCode',
+      description: 'A platform focused on coding-based opportunities with resources, tasks, and a clean UX for learners and contributors.',
+      technologies: ['React', 'TypeScript', 'TailwindCSS'],
+      github: 'https://github.com/dheerajgaurgithub/EarnByCode',
+      live: 'https://earnbycode-ebc.vercel.app/',
+      featured: true,
+      status: 'Completed'
+    },
+    {
+      title: 'ShikFy',
+      description: 'An educational platform delivering curated content and a responsive interface for learners.',
+      technologies: ['React', 'JavaScript', 'CSS'],
+      github: 'https://github.com/dheerajgaurgithub/Shikfy',
+      live: 'https://shikfy.netlify.app/',
+      featured: true,
+      status: 'Completed'
+    },
     {
       title: 'Car Racing Game',
       description: 'A thrilling web application racing game with modern UI and engaging gameplay mechanics.',
@@ -42,33 +67,6 @@ const Projects = () => {
       featured: true,
       status: 'Completed'
     },
-    // {
-    //   title: 'Social Media App',
-    //   description: 'A full-featured social media web application built with modern web technologies. Users can register, log in, create posts, like, comment, follow/unfollow others, and chat in real-time.',
-    //   technologies: ['MERN Stack', 'Socket.io', 'Real-time Chat', 'Authentication'],
-    //   github: 'https://github.com/dheerajgaurgithub/Social_Media_App',
-    //   live: '',
-    //   featured: false,
-    //   status: 'Completed'
-    // },
-    // {
-    //   title: 'Weather App',
-    //   description: 'A modern weather application built with React.js frontend and Node.js backend that allows users to search for current weather information by city with real-time data.',
-    //   technologies: ['React.js', 'Node.js', 'Weather API', 'Responsive Design'],
-    //   github: 'https://github.com/dheerajgaurgithub/Weather-App',
-    //   live: '',
-    //   featured: false,
-    //   status: 'Completed'
-    // },
-    // {
-    //   title: 'CleanBin - Waste Management',
-    //   description: 'CleanBin is a full-stack, real-world waste management and housekeeping platform offering subscription-based door-to-door dustbin cleaning and home services.',
-    //   technologies: ['Node.js', 'Express.js', 'MongoDB', 'Full-Stack'],
-    //   github: 'https://github.com/dheerajgaurgithub/cleanbin-doorstep-waste-solution',
-    //   live: '',
-    //   featured: false,
-    //   status: 'Completed'
-    // },
     {
       title: 'Recipe Management System',
       description: 'CRUD Operation system for recipe management - add, delete, update recipes with a clean and intuitive interface.',
@@ -102,7 +100,7 @@ const Projects = () => {
       technologies: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design'],
       github: 'https://github.com/dheerajgaurgithub/propsal',
       live: 'https://proposedheeraj.netlify.app/',
-      featured: false,
+      featured: true,
       status: 'Completed'
     },
     {
@@ -118,6 +116,69 @@ const Projects = () => {
 
   const featuredProjects = projects.filter(project => project.featured);
   const otherProjects = projects.filter(project => !project.featured);
+
+  const screenshotUrl = (url: string) => {
+    if (!url || url === '#') return '';
+    try {
+      return `https://image.thum.io/get/width/1600/${encodeURIComponent(url)}`;
+    } catch {
+      return '';
+    }
+  };
+
+  const username = 'dheerajgaurgithub';
+  const [profile, setProfile] = useState<{ public_repos: number; followers: number; following: number; public_gists: number } | null>(null);
+  const [repos, setRepos] = useState<any[]>([]);
+  const [loadingRepos, setLoadingRepos] = useState<boolean>(true);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const res = await fetch(`https://api.github.com/users/${username}`, {
+          headers: { Accept: 'application/vnd.github+json' }
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setProfile(data);
+        }
+      } catch {}
+    };
+
+    const fetchRepos = async () => {
+      try {
+        const res = await fetch(`https://api.github.com/users/${username}/repos?per_page=30&sort=updated`, {
+          headers: { Accept: 'application/vnd.github+json' }
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setRepos(data);
+        }
+      } catch {}
+      finally {
+        setLoadingRepos(false);
+      }
+    };
+
+    fetchProfile();
+    fetchRepos();
+  }, []);
+
+  const mappedRepos = useMemo(() => {
+    const excludeTitles = new Set(projects.map(p => p.title.toLowerCase()));
+    return repos
+      .filter(r => !r.fork)
+      .filter(r => !excludeTitles.has(String(r.name).toLowerCase()))
+      .slice(0, 9)
+      .map(r => ({
+        title: r.name,
+        description: r.description || 'No description provided.',
+        technologies: [r.language].filter(Boolean),
+        github: r.html_url,
+        live: r.homepage && r.homepage.trim() !== '' ? r.homepage : '#',
+        featured: false,
+        status: 'Public'
+      }));
+  }, [repos, projects]);
 
   return (
     <section id="projects" className="py-12 sm:py-16 lg:py-20 bg-muted/30">
@@ -145,144 +206,94 @@ const Projects = () => {
 
     {/* Featured Projects */}
     <div className="mb-12 sm:mb-16">
-      <h3 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8 text-center gradient-text">
-        Major Projects
-      </h3>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
         {featuredProjects.map((project, index) => (
           <Card 
             key={index} 
-            className="project-card h-full"
+            className="group h-full overflow-hidden border-0 bg-transparent shadow-none ring-0 rounded-xl"
             style={{animationDelay: `${index * 0.1}s`}}
           >
-            <CardContent className="p-4 sm:p-6 lg:p-8 h-full flex flex-col">
-              <div className="flex items-start justify-between mb-4 gap-4">
-                <div className="flex-1 min-w-0">
-                  <h4 className="text-lg sm:text-xl font-bold mb-2 group-hover:text-primary transition-colors truncate">
-                    {project.title}
-                  </h4>
-                  <Badge 
-                    variant="secondary"
-                    className="bg-gradient-to-r from-primary/10 to-accent/10 text-primary border border-primary/30 text-xs sm:text-sm"
-                  >
-                    {project.status}
-                  </Badge>
-                </div>
-                <div className="flex gap-1 sm:gap-2 flex-shrink-0">
-                  <a 
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-1.5 sm:p-2 rounded-lg hover:bg-muted transition-colors"
-                    title="View Source"
-                    aria-label="View source code"
-                  >
-                    <Github className="h-4 w-4 sm:h-5 sm:w-5" />
-                  </a>
-                  {project.live !== '#' && (
-                    <a 
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-1.5 sm:p-2 rounded-lg hover:bg-muted transition-colors"
-                      title="View Live"
-                      aria-label="View live demo"
-                    >
-                      <ExternalLink className="h-4 w-4 sm:h-5 sm:w-5" />
-                    </a>
-                  )}
-                </div>
-              </div>
-
-              <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6 leading-relaxed flex-grow">
-                {project.description}
-              </p>
-
-              <div className="mt-auto">
-                <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                  {project.technologies.map((tech, techIndex) => (
+            <CardContent 
+              className="p-4 sm:p-6 lg:p-8 h-full flex flex-col relative text-white transition-all duration-300 brightness-110 group-hover:brightness-100"
+              style={{ 
+                backgroundImage: 
+                  project.title === 'EarnByCode' ? `url(${ebcImg})` :
+                  project.title === 'ShikFy' ? `url(${shikfyImg})` :
+                  project.title === 'Car Racing Game' ? `url(${lanracerImg})` :
+                  project.title === 'BhuviKart E-Commerce' ? `url(${bhuvikartImg})` :
+                  project.title === 'Jovac Project - TestGenerator' ? `url(${jovacImg})` :
+                  project.title === 'E-Reader Platform' ? `url(${ereaderImg})` :
+                  project.title === 'Propose Your Crush' ? `url(${proposeImg})` :
+                  (project.live !== '#' ? `url(${screenshotUrl(project.live)})` : undefined),
+                backgroundSize: 'cover',
+                backgroundPosition: 'center'
+              }}
+            >
+              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="relative z-10 flex flex-col h-full opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                <div className="flex items-start justify-between mb-4 gap-4">
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-lg sm:text-xl font-bold mb-2 group-hover:text-primary transition-colors truncate">
+                      {project.title}
+                    </h4>
                     <Badge 
-                      key={techIndex} 
-                      variant="outline"
-                      className="text-xs border-primary/20 hover:border-primary/50 transition-colors"
+                      variant="secondary"
+                      className="bg-gradient-to-r from-primary/10 to-accent/10 text-primary border border-primary/30 text-xs sm:text-sm"
                     >
-                      {tech}
+                      {project.status}
                     </Badge>
-                  ))}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    </div>
-
-    {/* Other Projects */}
-    <div className="mb-12 sm:mb-16">
-      <h3 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8 text-center gradient-text">
-        Other Projects
-      </h3>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-        {otherProjects.map((project, index) => (
-          <Card 
-            key={index} 
-            className="tech-card h-full"
-            style={{animationDelay: `${(index + featuredProjects.length) * 0.1}s`}}
-          >
-            <CardContent className="p-4 sm:p-5 lg:p-6 h-full flex flex-col">
-              <div className="flex items-start justify-between mb-3 sm:mb-4 gap-3">
-                <h4 className="text-base sm:text-lg font-semibold group-hover:text-primary transition-colors flex-1 min-w-0">
-                  <span className="line-clamp-2">{project.title}</span>
-                </h4>
-                <div className="flex gap-1 flex-shrink-0">
-                  <a 
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-1 rounded hover:bg-muted transition-colors"
-                    aria-label="View source code"
-                  >
-                    <Github className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                  </a>
-                  {project.live !== '#' && (
+                  </div>
+                  <div className="flex gap-1 sm:gap-2 flex-shrink-0">
                     <a 
-                      href={project.live}
+                      href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-1 rounded hover:bg-muted transition-colors"
-                      aria-label="View live demo"
+                      className="p-1.5 sm:p-2 rounded-lg hover:bg-muted transition-colors bg-white/10 backdrop-blur"
+                      title="View Source"
+                      aria-label="View source code"
                     >
-                      <ExternalLink className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                      <Github className="h-4 w-4 sm:h-5 sm:w-5" />
                     </a>
-                  )}
+                    {project.live !== '#' && (
+                      <a 
+                        href={project.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-1.5 sm:p-2 rounded-lg hover:bg-muted transition-colors bg-white/10 backdrop-blur"
+                        title="View Live"
+                        aria-label="View live demo"
+                      >
+                        <ExternalLink className="h-4 w-4 sm:h-5 sm:w-5" />
+                      </a>
+                    )}
+                  </div>
                 </div>
-              </div>
 
-              <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4 flex-grow line-clamp-3">
-                {project.description}
-              </p>
+                <p className="text-sm sm:text-base text-white/90 mb-4 sm:mb-6 leading-relaxed flex-grow">
+                  {project.description}
+                </p>
 
-              <div className="flex flex-wrap gap-1">
-                {project.technologies.slice(0, window.innerWidth < 640 ? 2 : 3).map((tech, techIndex) => (
-                  <Badge 
-                    key={techIndex} 
-                    variant="outline"
-                    className="text-xs border-primary/20"
-                  >
-                    {tech}
-                  </Badge>
-                ))}
-                {project.technologies.length > (window.innerWidth < 640 ? 2 : 3) && (
-                  <Badge variant="outline" className="text-xs border-primary/20">
-                    +{project.technologies.length - (window.innerWidth < 640 ? 2 : 3)}
-                  </Badge>
-                )}
+                <div className="mt-auto">
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                    {project.technologies.map((tech, techIndex) => (
+                      <Badge 
+                        key={techIndex} 
+                        variant="outline"
+                        className="text-xs border-white/40 text-white/90 bg-black/20 backdrop-blur"
+                      >
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
               </div>
             </CardContent>
           </Card>
         ))}
       </div>
     </div>
+
+    {/* Other Projects removed as requested */}
 
     {/* GitHub Stats */}
     <div className="mt-12 sm:mt-16">
@@ -293,16 +304,16 @@ const Projects = () => {
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
             <div className="p-4 rounded-lg bg-muted/30">
-              <div className="text-2xl sm:text-3xl font-bold text-primary mb-1 sm:mb-2">6+</div>
+              <div className="text-2xl sm:text-3xl font-bold text-primary mb-1 sm:mb-2">{profile?.public_repos ?? '—'}</div>
               <p className="text-sm sm:text-base text-muted-foreground">Public Repositories</p>
             </div>
             <div className="p-4 rounded-lg bg-muted/30">
-              <div className="text-2xl sm:text-3xl font-bold text-secondary mb-1 sm:mb-2">5+</div>
-              <p className="text-sm sm:text-base text-muted-foreground">Technologies Used</p>
+              <div className="text-2xl sm:text-3xl font-bold text-secondary mb-1 sm:mb-2">{profile?.followers ?? '—'}</div>
+              <p className="text-sm sm:text-base text-muted-foreground">Followers</p>
             </div>
             <div className="p-4 rounded-lg bg-muted/30">
-              <div className="text-2xl sm:text-3xl font-bold text-accent mb-1 sm:mb-2">100+</div>
-              <p className="text-sm sm:text-base text-muted-foreground">Commits This Year</p>
+              <div className="text-2xl sm:text-3xl font-bold text-accent mb-1 sm:mb-2">{profile?.following ?? '—'}</div>
+              <p className="text-sm sm:text-base text-muted-foreground">Following</p>
             </div>
           </div>
           <Button 
