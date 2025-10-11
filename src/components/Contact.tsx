@@ -203,6 +203,7 @@ const ContactForm: React.FC = () => {
       const env = (import.meta as any).env || {};
       const apiBase = env.VITE_CONTACT_API
         || (env.DEV ? 'http://localhost:5000/api' : 'https://portfolio-dheerajgaur.onrender.com/api');
+      console.log('[Contact] Using API base:', apiBase);
       const res = await fetch(`${apiBase}/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
