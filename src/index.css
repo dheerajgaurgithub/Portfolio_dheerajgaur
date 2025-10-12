@@ -1,0 +1,233 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Portfolio Design System for Dheeraj Gaur 
+Modern, tech-themed with elegant gradients and animations
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Base colors for light mode */
+    --background: 220 15% 97%;
+    --foreground: 220 30% 6%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 30% 6%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 30% 6%;
+
+    /* Tech-themed primary: Modern blue */
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 217 100% 70%;
+
+    /* Tech secondary: Deep purple */
+    --secondary: 262 52% 47%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 15% 95%;
+    --muted-foreground: 220 10% 46%;
+
+    /* Accent: Vibrant tech green */
+    --accent: 142 76% 36%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 217 91% 60%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Hero gradient for light mode */
+    --gradient-hero: linear-gradient(135deg, hsl(220 15% 97%) 0%, hsl(217 91% 95%) 50%, hsl(220 15% 97%) 100%);
+    --shadow-elegant: 0 20px 60px -10px hsl(217 91% 60% / 0.2);
+  }
+
+  .dark {
+    /* Dark mode tech theme - enhanced for modern look */
+    --background: 0 0% 4%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 217 100% 70%;
+
+    --secondary: 262 52% 47%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 70%;
+
+    --accent: 142 76% 36%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 217 91% 60%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Hero gradient for dark mode */
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 4%) 0%, hsl(220 25% 6%) 50%, hsl(0 0% 4%) 100%);
+    --shadow-elegant: 0 20px 60px -10px hsl(217 91% 60% / 0.4);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground scroll-smooth;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+
+  .tech-card {
+    @apply bg-card border border-border rounded-lg p-6 shadow-lg
+           hover:shadow-xl transition-all duration-300
+           hover:scale-105 hover:border-primary/50;
+  }
+
+  .hero-glow {
+    @apply relative;
+  }
+
+  .hero-glow::before {
+    content: '';
+    @apply absolute inset-0 rounded-full 
+           bg-gradient-to-r from-primary/30 to-secondary/30
+           blur-2xl -z-10 animate-pulse;
+  }
+
+  .typing-cursor::after {
+    content: '|';
+    @apply animate-pulse text-primary ml-1;
+  }
+
+  .skill-icon {
+    @apply w-12 h-12 mx-auto mb-3 p-2 rounded-lg bg-gradient-to-br from-primary/10 to-secondary/10
+           border border-primary/20 hover:border-primary/50 transition-all duration-300
+           hover:scale-110 hover:rotate-3;
+  }
+
+  .project-card {
+    @apply bg-gradient-to-br from-card to-muted/50 border border-border
+           rounded-xl p-6 shadow-lg hover:shadow-xl
+           transition-all duration-500 hover:scale-[1.02] hover:border-primary/30
+           overflow-hidden relative;
+  }
+
+  .contact-link {
+    @apply relative inline-flex items-center gap-2 text-foreground hover:text-primary
+           transition-colors duration-300;
+  }
+
+  .contact-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary
+           transition-all duration-300;
+  }
+
+  .contact-link:hover::after {
+    @apply w-full;
+  }
+
+  .floating-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .slide-in-left {
+    animation: slideInLeft 1s ease-out forwards;
+  }
+
+  .slide-in-right {
+    animation: slideInRight 1s ease-out forwards;
+  }
+
+  .fade-in-up {
+    animation: fadeInUp 1s ease-out forwards;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
