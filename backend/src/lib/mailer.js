@@ -4,17 +4,10 @@ import nodemailer from 'nodemailer';
 const SMTP_USER = process.env.SMTP_USER;
 const SMTP_PASS = process.env.SMTP_PASS;
 const TO_EMAIL = process.env.TO_EMAIL;
+const EMAIL_SERVICE = process.env.EMAIL_SERVICE || 'gmail'; // gmail, webhook, or log
 
-// Validate environment variables
-if (!SMTP_USER || !SMTP_PASS || !TO_EMAIL) {
-  console.error('❌ Missing required environment variables:');
-  console.error('SMTP_USER:', SMTP_USER ? 'SET' : 'NOT SET');
-  console.error('SMTP_PASS:', SMTP_PASS ? 'SET' : 'NOT SET');
-  console.error('TO_EMAIL:', TO_EMAIL ? 'SET' : 'NOT SET');
-  console.error('Please set these environment variables in Render dashboard');
-}
-
-console.log('📧 SMTP Configuration:', {
+console.log('📧 Email Configuration:', {
+  service: EMAIL_SERVICE,
   user: SMTP_USER || 'NOT SET',
   pass: SMTP_PASS ? '***SET***' : 'NOT SET',
   to: TO_EMAIL || 'NOT SET'
@@ -76,6 +69,44 @@ export async function sendContactEmail({ name, email, message }) {
       response: error.response,
       stack: error.stack
     });
+    throw error;
+  }
+}
+
+// 🌐 Webhook-based email service (more reliable for Render)
+export async function sendWebhookEmail({ name, email, message }) {
+  console.log('🌐 Attempting to send email via webhook...');
+  
+  try {
+    // Using a free email service like EmailJS or Formspree
+    const webhookUrl = process.env.WEBHOOK_URL || 'https://formspree.io/f/xpwgqkqv';
+    
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        message: message,
+        _subject: `New contact from ${name}`,
+        _replyto: email,
+        _captcha: 'false'
+      })
+    });
+    
+    if (response.ok) {
+      console.log('✅ Webhook email sent successfully');
+      return {
+        messageId: 'webhook-' + Date.now(),
+        webhook: true
+      };
+    } else {
+      throw new Error(`Webhook failed: ${response.status}`);
+    }
+  } catch (error) {
+    console.error('❌ Webhook email failed:', error.message);
     throw error;
   }
 }

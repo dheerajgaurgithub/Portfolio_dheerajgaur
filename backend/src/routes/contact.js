@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { sendContactEmail, logContactInfo } from '../lib/mailer.js';
+import { sendContactEmail, sendWebhookEmail, logContactInfo } from '../lib/mailer.js';
 
 const router = Router();
 
@@ -98,28 +98,37 @@ router.post('/', async (req, res) => {
 
     console.log('✅ All validations passed, attempting to send email...');
     
-    // Try to send email, fallback to logging if it fails
+    // Try multiple email methods in order of reliability
     let emailResult;
+    const contactData = { 
+      name: name.trim(), 
+      email: email.trim(), 
+      message: message.trim() 
+    };
+    
     try {
-      emailResult = await sendContactEmail({ 
-        name: name.trim(), 
-        email: email.trim(), 
-        message: message.trim() 
-      });
-      console.log('✅ Email sent successfully:', emailResult.messageId);
-    } catch (emailError) {
-      console.log('⚠️ Email failed, falling back to logging:', emailError.message);
-      emailResult = await logContactInfo({ 
-        name: name.trim(), 
-        email: email.trim(), 
-        message: message.trim() 
-      });
+      // Method 1: Try webhook service first (most reliable for Render)
+      console.log('🌐 Trying webhook email service...');
+      emailResult = await sendWebhookEmail(contactData);
+      console.log('✅ Webhook email sent successfully:', emailResult.messageId);
+    } catch (webhookError) {
+      console.log('⚠️ Webhook failed, trying SMTP:', webhookError.message);
+      
+      try {
+        // Method 2: Try SMTP if webhook fails
+        emailResult = await sendContactEmail(contactData);
+        console.log('✅ SMTP email sent successfully:', emailResult.messageId);
+      } catch (smtpError) {
+        console.log('⚠️ SMTP failed, falling back to logging:', smtpError.message);
+        // Method 3: Log as final fallback
+        emailResult = await logContactInfo(contactData);
+      }
     }
     
     return res.json({ 
       ok: true, 
       messageId: emailResult.messageId,
-      logged: emailResult.logged || false,
+      method: emailResult.webhook ? 'webhook' : emailResult.logged ? 'logged' : 'smtp',
       timestamp: new Date().toISOString()
     });
     
