@@ -3,6 +3,26 @@ import { sendContactEmail } from '../lib/mailer.js';
 
 const router = Router();
 
+// GET /api/contact - Show available methods
+router.get('/', (req, res) => {
+  res.json({
+    message: 'Contact API',
+    availableMethods: [
+      {
+        method: 'POST',
+        path: '/api/contact',
+        description: 'Send a contact message',
+        requiredFields: ['name', 'email', 'message'],
+        example: {
+          name: 'John Doe',
+          email: 'john@example.com',
+          message: 'Hello, this is a test message'
+        }
+      }
+    ]
+  });
+});
+
 router.post('/', async (req, res) => {
   try {
     const { name, email, message } = req.body || {};
