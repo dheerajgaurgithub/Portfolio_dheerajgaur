@@ -9,13 +9,17 @@ const TO_EMAIL = 'dheerajgaur.0fficial@gmail.com';
 
 // ✅ Create transporter with Gmail SMTP
 export const transporter = nodemailer.createTransport({
+  service: 'gmail',
   host: 'smtp.gmail.com',
-  port: 465,
-  secure: true,
+  port: 587,
+  secure: false,
   auth: {
     user: SMTP_USER,
     pass: SMTP_PASS,
   },
+  tls: {
+    rejectUnauthorized: false
+  }
 });
 
 // 📩 Function to send contact email
