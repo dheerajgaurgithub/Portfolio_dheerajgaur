@@ -1,11 +1,15 @@
 import nodemailer from 'nodemailer';
 
-// 🔒 Hardcoded configuration
-const PORT = 5000;
-const FRONTEND_ORIGIN = 'https://dheerajgaurofficial.netlify.app/';
-const SMTP_USER = 'dheerajgaur.0fficial@gmail.com';
-const SMTP_PASS = 'msctxvephduwhsay';
-const TO_EMAIL = 'dheerajgaur.0fficial@gmail.com';
+// 🔒 Environment variables for production
+const SMTP_USER = process.env.SMTP_USER || 'dheerajgaur.0fficial@gmail.com';
+const SMTP_PASS = process.env.SMTP_PASS || 'msctxvephduwhsay';
+const TO_EMAIL = process.env.TO_EMAIL || 'dheerajgaur.0fficial@gmail.com';
+
+console.log('📧 SMTP Configuration:', {
+  user: SMTP_USER,
+  pass: SMTP_PASS ? '***hidden***' : 'NOT SET',
+  to: TO_EMAIL
+});
 
 // ✅ Create transporter with Gmail SMTP
 export const transporter = nodemailer.createTransport({
@@ -24,14 +28,22 @@ export const transporter = nodemailer.createTransport({
 
 // 📩 Function to send contact email
 export async function sendContactEmail({ name, email, message }) {
-  const info = await transporter.sendMail({
-    from: SMTP_USER,
-    to: TO_EMAIL,
-    subject: `New contact from ${name}`,
-    replyTo: email,
-    text: `From: ${name} <${email}>\n\n${message}`,
-    html: `<p><strong>From:</strong> ${name} &lt;${email}&gt;</p><p>${message.replace(/\n/g, '<br/>')}</p>`,
-  });
-
-  return info;
+  console.log('📧 Attempting to send email:', { name, email, message: message.substring(0, 50) + '...' });
+  
+  try {
+    const info = await transporter.sendMail({
+      from: SMTP_USER,
+      to: TO_EMAIL,
+      subject: `New contact from ${name}`,
+      replyTo: email,
+      text: `From: ${name} <${email}>\n\n${message}`,
+      html: `<p><strong>From:</strong> ${name} &lt;${email}&gt;</p><p>${message.replace(/\n/g, '<br/>')}</p>`,
+    });
+    
+    console.log('✅ Email sent successfully:', info.messageId);
+    return info;
+  } catch (error) {
+    console.error('❌ Email sending failed:', error);
+    throw error;
+  }
 }
