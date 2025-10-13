@@ -16,6 +16,10 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
 });
 
+app.get('/', (req, res) => {
+  res.json({ message: 'Portfolio backend is running', docs: ['/api/health', 'POST /api/contact'] });
+});
+
 app.use('/api/contact', contactRouter);
 
 app.listen(PORT, () => {
