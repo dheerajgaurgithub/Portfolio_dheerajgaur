@@ -77,42 +77,80 @@ export async function sendContactEmail({ name, email, message }) {
   }
 }
 
-// 🌐 Simple HTTP-based email service (more reliable for Render)
+// 🌐 Real email service using Resend (reliable for Render)
 export async function sendWebhookEmail({ name, email, message }) {
-  console.log('🌐 Attempting to send email via HTTP service...');
+  console.log('🌐 Attempting to send email via Resend service...');
   
   try {
-    // Using a simple HTTP POST to send email data
-    // This will be logged and can be processed by external services
-    const emailPayload = {
-      timestamp: new Date().toISOString(),
-      contact: {
-        name: name,
-        email: email,
-        message: message
+    // Using Resend API - a reliable email service for developers
+    const resendApiKey = process.env.RESEND_API_KEY;
+    
+    if (!resendApiKey) {
+      console.log('⚠️ No Resend API key found, falling back to logging');
+      throw new Error('No Resend API key configured');
+    }
+    
+    const emailData = {
+      from: 'Portfolio Contact <onboarding@resend.dev>',
+      to: [TO_EMAIL || 'dheerajgaur.0fficial@gmail.com'],
+      subject: `New contact from ${name}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #333;">New Contact Form Submission</h2>
+          <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Message:</strong></p>
+            <div style="background: white; padding: 15px; border-radius: 4px; border-left: 4px solid #007bff;">
+              ${message.replace(/\n/g, '<br>')}
+            </div>
+          </div>
+          <p style="color: #666; font-size: 12px;">
+            Sent from your portfolio contact form at ${new Date().toISOString()}
+          </p>
+        </div>
+      `,
+      reply_to: email
+    };
+    
+    const response = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${resendApiKey}`,
+        'Content-Type': 'application/json',
       },
-      metadata: {
-        source: 'portfolio_contact_form',
-        userAgent: 'Portfolio Backend',
-        ip: 'render-server'
-      }
-    };
+      body: JSON.stringify(emailData)
+    });
     
-    // For now, we'll just log this as a structured webhook call
-    // In production, you can replace this with a real webhook URL
-    console.log('📧 WEBHOOK EMAIL DATA:', JSON.stringify(emailPayload, null, 2));
-    
-    // Simulate successful webhook call
-    console.log('✅ Webhook email processed successfully');
-    return {
-      messageId: 'webhook-' + Date.now(),
-      webhook: true,
-      logged: true
-    };
+    if (response.ok) {
+      const result = await response.json();
+      console.log('✅ Resend email sent successfully:', result.id);
+      return {
+        messageId: result.id,
+        webhook: true,
+        service: 'resend'
+      };
+    } else {
+      const error = await response.text();
+      throw new Error(`Resend API error: ${response.status} - ${error}`);
+    }
     
   } catch (error) {
-    console.error('❌ Webhook email failed:', error.message);
-    throw error;
+    console.error('❌ Resend email failed:', error.message);
+    
+    // Fallback to logging if Resend fails
+    console.log('📧 FALLBACK EMAIL DATA:', JSON.stringify({
+      timestamp: new Date().toISOString(),
+      contact: { name, email, message },
+      metadata: { source: 'portfolio_contact_form', fallback: true }
+    }, null, 2));
+    
+    return {
+      messageId: 'fallback-' + Date.now(),
+      webhook: true,
+      logged: true,
+      fallback: true
+    };
   }
 }
 
