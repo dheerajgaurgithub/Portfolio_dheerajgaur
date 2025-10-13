@@ -11,7 +11,7 @@ services:
     envVars:
       - key: VITE_API_BASE
         # Set this to the backend URL after deploying backend, e.g. https://portfolio-backend.onrender.com
-        value: ""
+        value: "https://portfolio-backend.onrender.com"
 
   - type: web
     name: portfolio-backend
@@ -25,7 +25,7 @@ services:
         value: 5000
       - key: FRONTEND_ORIGIN
         # Set this to your frontend static site URL after first deploy.
-        value: "*"
+        value: "https://dheerajgaurofficial.netlify.app"
       - key: SMTP_USER
         sync: false
       - key: SMTP_PASS

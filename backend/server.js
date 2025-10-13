@@ -5,12 +5,29 @@ import contactRouter from './src/routes/contact.js';
 const app = express();
 const PORT = 5000;
 
-// ✅ Frontend origin without trailing slash
-const FRONTEND_ORIGIN = 'https://dheerajgaurofficial.netlify.app';
+// ✅ Frontend origin from environment variable
+const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || 'https://dheerajgaurofficial.netlify.app';
 
-// In server.js, update the CORS configuration to this:
+// CORS configuration
 const corsOptions = {
-  origin: 'https://dheerajgaurofficial.netlify.app',
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    // Allow your frontend domains
+    const allowedOrigins = [
+      'https://dheerajgaurofficial.netlify.app',
+      'https://dheerajgaur.dev',
+      'http://localhost:8080',
+      'http://localhost:3000'
+    ];
+    
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
   credentials: true,
@@ -26,7 +43,17 @@ app.options('*', cors(corsOptions));
 
 // Add headers before the routes are defined
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://dheerajgaurofficial.netlify.app');
+  const origin = req.headers.origin;
+  const allowedOrigins = [
+    'https://dheerajgaurofficial.netlify.app',
+    'https://dheerajgaur.dev',
+    'http://localhost:8080',
+    'http://localhost:3000'
+  ];
+  
+  if (allowedOrigins.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.header('Access-Control-Allow-Credentials', true);
