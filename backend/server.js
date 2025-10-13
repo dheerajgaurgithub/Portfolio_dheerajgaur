@@ -8,21 +8,30 @@ const PORT = 5000;
 // ✅ Frontend origin without trailing slash
 const FRONTEND_ORIGIN = 'https://dheerajgaurofficial.netlify.app';
 
-// ✅ Define detailed CORS configuration
+// In server.js, update the CORS configuration to this:
 const corsOptions = {
-  origin: FRONTEND_ORIGIN,
+  origin: 'https://dheerajgaurofficial.netlify.app',
   methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
   credentials: true,
   preflightContinue: false,
-  optionsSuccessStatus: 204,
+  optionsSuccessStatus: 204
 };
 
-// ✅ Apply CORS middleware globally
+// Apply CORS middleware
 app.use(cors(corsOptions));
 
-// ✅ Handle all preflight (OPTIONS) requests
+// Handle preflight requests
 app.options('*', cors(corsOptions));
+
+// Add headers before the routes are defined
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://dheerajgaurofficial.netlify.app');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Credentials', true);
+  next();
+});
 
 app.use(express.json());
 
