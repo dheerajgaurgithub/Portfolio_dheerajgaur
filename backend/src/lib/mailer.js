@@ -26,15 +26,18 @@ if (SMTP_USER && SMTP_PASS && TO_EMAIL) {
   transporter = nodemailer.createTransport({
     service: 'gmail',
     host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
+    port: 587,
+    secure: false,
     auth: {
       user: SMTP_USER,
       pass: SMTP_PASS,
     },
     tls: {
       rejectUnauthorized: false
-    }
+    },
+    connectionTimeout: 60000, // 60 seconds
+    greetingTimeout: 30000,   // 30 seconds
+    socketTimeout: 60000      // 60 seconds
   });
 } else {
   console.error('❌ Cannot create SMTP transporter - missing environment variables');
