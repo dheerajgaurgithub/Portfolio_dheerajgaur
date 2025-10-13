@@ -27,8 +27,8 @@ services:
         # Set this to your frontend static site URL after first deploy.
         value: "https://dheerajgaurofficial.netlify.app"
       - key: SMTP_USER
-        value: "dheerajgaur.0fficial@gmail.com"
+        sync: false
       - key: SMTP_PASS
-        value: "msctxvephduwhsay"
+        sync: false
       - key: TO_EMAIL
-        value: "dheerajgaur.0fficial@gmail.com"
+        sync: false

@@ -1,9 +1,13 @@
 import express from 'express';
 import cors from 'cors';
+import dotenv from 'dotenv';
 import contactRouter from './src/routes/contact.js';
 
+// Load environment variables from .env file
+dotenv.config();
+
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 // ✅ Frontend origin from environment variable
 const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || 'https://dheerajgaurofficial.netlify.app';

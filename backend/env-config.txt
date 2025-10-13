@@ -1,0 +1,14 @@
+# Environment Variables Configuration
+# For local development, create a .env file in the backend directory with these variables:
+
+SMTP_USER=dheerajgaur.0fficial@gmail.com
+SMTP_PASS=msctxvephduwhsay
+TO_EMAIL=dheerajgaur.0fficial@gmail.com
+PORT=5000
+NODE_ENV=development
+FRONTEND_ORIGIN=http://localhost:8080
+
+# Instructions:
+# 1. Create a .env file in the backend directory
+# 2. Copy the above variables to your .env file
+# 3. For production, set these same variables in Render dashboard

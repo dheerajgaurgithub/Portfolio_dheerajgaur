@@ -1,34 +1,53 @@
 import nodemailer from 'nodemailer';
 
-// 🔒 Environment variables for production
-const SMTP_USER = process.env.SMTP_USER || 'dheerajgaur.0fficial@gmail.com';
-const SMTP_PASS = process.env.SMTP_PASS || 'msctxvephduwhsay';
-const TO_EMAIL = process.env.TO_EMAIL || 'dheerajgaur.0fficial@gmail.com';
+// 🔒 Environment variables ONLY - no hardcoded values
+const SMTP_USER = process.env.SMTP_USER;
+const SMTP_PASS = process.env.SMTP_PASS;
+const TO_EMAIL = process.env.TO_EMAIL;
+
+// Validate environment variables
+if (!SMTP_USER || !SMTP_PASS || !TO_EMAIL) {
+  console.error('❌ Missing required environment variables:');
+  console.error('SMTP_USER:', SMTP_USER ? 'SET' : 'NOT SET');
+  console.error('SMTP_PASS:', SMTP_PASS ? 'SET' : 'NOT SET');
+  console.error('TO_EMAIL:', TO_EMAIL ? 'SET' : 'NOT SET');
+  console.error('Please set these environment variables in Render dashboard');
+}
 
 console.log('📧 SMTP Configuration:', {
-  user: SMTP_USER,
-  pass: SMTP_PASS ? '***hidden***' : 'NOT SET',
-  to: TO_EMAIL
+  user: SMTP_USER || 'NOT SET',
+  pass: SMTP_PASS ? '***SET***' : 'NOT SET',
+  to: TO_EMAIL || 'NOT SET'
 });
 
-// ✅ Create transporter with Gmail SMTP
-export const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  host: 'smtp.gmail.com',
-  port: 587,
-  secure: false,
-  auth: {
-    user: SMTP_USER,
-    pass: SMTP_PASS,
-  },
-  tls: {
-    rejectUnauthorized: false
-  }
-});
+// Only create transporter if all env vars are set
+let transporter = null;
+if (SMTP_USER && SMTP_PASS && TO_EMAIL) {
+  transporter = nodemailer.createTransport({
+    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: SMTP_USER,
+      pass: SMTP_PASS,
+    },
+    tls: {
+      rejectUnauthorized: false
+    }
+  });
+} else {
+  console.error('❌ Cannot create SMTP transporter - missing environment variables');
+}
 
 // 📩 Function to send contact email
 export async function sendContactEmail({ name, email, message }) {
   console.log('📧 Attempting to send email:', { name, email, message: message.substring(0, 50) + '...' });
+  
+  // Check if transporter is available
+  if (!transporter) {
+    throw new Error('SMTP transporter not configured - missing environment variables');
+  }
   
   try {
     // First verify the connection
