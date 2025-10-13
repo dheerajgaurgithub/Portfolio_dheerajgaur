@@ -31,6 +31,11 @@ export async function sendContactEmail({ name, email, message }) {
   console.log('📧 Attempting to send email:', { name, email, message: message.substring(0, 50) + '...' });
   
   try {
+    // First verify the connection
+    console.log('🔍 Verifying SMTP connection...');
+    await transporter.verify();
+    console.log('✅ SMTP connection verified');
+    
     const info = await transporter.sendMail({
       from: SMTP_USER,
       to: TO_EMAIL,
@@ -43,7 +48,26 @@ export async function sendContactEmail({ name, email, message }) {
     console.log('✅ Email sent successfully:', info.messageId);
     return info;
   } catch (error) {
-    console.error('❌ Email sending failed:', error);
+    console.error('❌ Email sending failed:', {
+      message: error.message,
+      code: error.code,
+      response: error.response,
+      stack: error.stack
+    });
     throw error;
   }
+}
+
+// 🆘 Fallback function - just log the contact info if email fails
+export async function logContactInfo({ name, email, message }) {
+  console.log('📝 CONTACT FORM SUBMISSION (Email failed, logging instead):');
+  console.log('Name:', name);
+  console.log('Email:', email);
+  console.log('Message:', message);
+  console.log('Timestamp:', new Date().toISOString());
+  
+  return {
+    messageId: 'logged-' + Date.now(),
+    logged: true
+  };
 }

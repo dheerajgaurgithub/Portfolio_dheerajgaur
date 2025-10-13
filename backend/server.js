@@ -64,7 +64,17 @@ app.use(express.json());
 
 // Health check route
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok' });
+  res.json({ 
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    environment: {
+      NODE_ENV: process.env.NODE_ENV || 'development',
+      PORT: process.env.PORT || 5000,
+      SMTP_USER: process.env.SMTP_USER ? 'SET' : 'NOT SET',
+      SMTP_PASS: process.env.SMTP_PASS ? 'SET' : 'NOT SET',
+      TO_EMAIL: process.env.TO_EMAIL ? 'SET' : 'NOT SET'
+    }
+  });
 });
 
 // Root info route
